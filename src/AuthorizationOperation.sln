@@ -30,9 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Infr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.entrypoint", "1.entrypoint", "{0F16E634-D2E6-4658-A6C8-55E4DE3824C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationOperation.Test", "AuthorizationOperation.Test\AuthorizationOperation.Test.csproj", "{2B6BF57A-8F85-4023-9747-20AE95209BBE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-libs", "4-libs", "{7DEC632A-230B-46A2-A34B-FFCC43542782}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Test", "AuthorizationOperation.Test\AuthorizationOperation.Test.csproj", "{2B6BF57A-8F85-4023-9747-20AE95209BBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,7 +77,6 @@ Global
 		{CBEE1056-A187-487B-8625-75D94A1EC3E5} = {5CEB46A9-947A-478A-9BC1-B02BB4940114}
 		{0F16E634-D2E6-4658-A6C8-55E4DE3824C6} = {DA7A91E8-43BA-4736-BDED-EA303615EAFC}
 		{2B6BF57A-8F85-4023-9747-20AE95209BBE} = {0F16E634-D2E6-4658-A6C8-55E4DE3824C6}
-		{7DEC632A-230B-46A2-A34B-FFCC43542782} = {E3A75A1F-7615-45CD-BF20-FA19D5232512}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {55FEDAE4-770B-4B94-B912-0F157CC9141C}

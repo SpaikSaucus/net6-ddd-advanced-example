@@ -12,6 +12,8 @@ using AuthorizationOperation.Domain.Core;
 using AuthorizationOperation.Infrastructure.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using MySql.EntityFrameworkCore.Extensions;
+using AuthorizationOperation.Infrastructure.EF;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap
 {
@@ -61,10 +63,7 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap
                 o.Filters.Add(new ProducesResponseTypeAttribute(500));
             });
 
-            services.AddDbContext<AuthorizationDbContext>(opt =>
-            {
-                opt.UseMySQL(this.configuration.GetValue<string>("ConnectionStrings"));
-            });
+            services.AddEntityFrameworkMySQL().AddDbContext<AuthorizationDbContext>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }

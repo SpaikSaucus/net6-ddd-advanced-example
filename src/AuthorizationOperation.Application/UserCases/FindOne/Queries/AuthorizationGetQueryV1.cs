@@ -34,7 +34,7 @@ namespace AuthorizationOperation.Application.UserCases.FindOne.Queries
             {
                 Id = request.Id,
                 UUID = System.Guid.NewGuid(),
-                Status = AuthorizationStatus.WAITING_FOR_SIGNERS,
+                Status = new AuthorizationStatus() { Id = AuthorizationStatusEnum.WAITING_FOR_SIGNERS },
                 Created = System.DateTime.UtcNow,
                 Customer = "Customer 1"
             };

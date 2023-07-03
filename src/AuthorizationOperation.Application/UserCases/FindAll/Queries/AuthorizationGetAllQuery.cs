@@ -33,21 +33,21 @@ namespace AuthorizationOperation.Application.UserCases.FindAll.Queries
 
         public async Task<AuthorizationPageResponse> Handle(AuthorizationGetAllQuery request, CancellationToken cancellationToken)
         {
-            var listStatus = new List<AuthorizationStatus>();
+            var listStatus = new List<AuthorizationStatusEnum>();
 
             if (!request.Criteria.listStatus.Contains(EnumStatusRequest.DEFAULT))
             {
                 if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.CANCELLED))
-                    listStatus.Add(AuthorizationStatus.CANCELLED);
+                    listStatus.Add(AuthorizationStatusEnum.CANCELLED);
 
                 if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.WAITING_FOR_SIGNERS))
-                    listStatus.Add(AuthorizationStatus.WAITING_FOR_SIGNERS);
+                    listStatus.Add(AuthorizationStatusEnum.WAITING_FOR_SIGNERS);
 
                 if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.AUTHORIZED))
-                    listStatus.Add(AuthorizationStatus.AUTHORIZED);
+                    listStatus.Add(AuthorizationStatusEnum.AUTHORIZED);
 
                 if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.EXPIRED))
-                    listStatus.Add(AuthorizationStatus.EXPIRED);
+                    listStatus.Add(AuthorizationStatusEnum.EXPIRED);
             }
 
             var result = new AuthorizationPageResponse();
@@ -63,7 +63,8 @@ namespace AuthorizationOperation.Application.UserCases.FindAll.Queries
             result.Authorizations = page.Select(x => new AuthorizationResponse()
             {
                 Id = x.Id,
-                Status = x.Status.ToString(),
+                Status = x.Status.Name,
+                Customer = x.Customer,
                 Created = x.Created
             }).ToList();
 

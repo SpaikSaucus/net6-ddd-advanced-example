@@ -1,4 +1,5 @@
 ﻿using AuthorizationOperation.Domain.Core;
+using AuthorizationOperation.Infrastructure.EF;
 using System;
 using System.Collections;
 
