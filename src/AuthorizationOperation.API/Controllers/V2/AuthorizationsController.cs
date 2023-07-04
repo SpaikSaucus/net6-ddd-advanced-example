@@ -1,4 +1,6 @@
 using AuthorizationOperation.Application.Shared.ViewModels;
+using AuthorizationOperation.Application.UserCases.Create.Command;
+using AuthorizationOperation.Application.UserCases.Create.ViewModels;
 using AuthorizationOperation.Application.UserCases.FindAll.Queries;
 using AuthorizationOperation.Application.UserCases.FindAll.ViewModels;
 using AuthorizationOperation.Application.UserCases.FindOne.Queries;
@@ -37,6 +39,7 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         public async Task<IActionResult> GetOne(Guid uuid)
         {
             var response = await this.mediator.Send(new AuthorizationGetQuery() { UUID = uuid });
+            if(response == null) return this.NotFound();
             return this.Ok(response);
         }
 
@@ -61,6 +64,22 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
                 Limit = limit,
                 Offset = offset,
                 Sort = sort
+            });
+            return this.Ok(response);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>This method exists only in the current version, to show how the same "Controller" can evolve and maintain the versioning</remarks>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AuthorizationResponse))]
+        public async Task<IActionResult> Create([FromBody] CreateAuthorizationRequest req)
+        {
+            var response = await this.mediator.Send(new CreateAuthorizationCommand()
+            {
+                Request = req
             });
             return this.Ok(response);
         }

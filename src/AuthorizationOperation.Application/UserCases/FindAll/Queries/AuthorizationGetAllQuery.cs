@@ -31,7 +31,7 @@ namespace AuthorizationOperation.Application.UserCases.FindAll.Queries
             this.logger = logger;
         }
 
-        public async Task<AuthorizationPageResponse> Handle(AuthorizationGetAllQuery request, CancellationToken cancellationToken)
+        public Task<AuthorizationPageResponse> Handle(AuthorizationGetAllQuery request, CancellationToken cancellationToken)
         {
             var listStatus = new List<AuthorizationStatusEnum>();
 
@@ -68,7 +68,7 @@ namespace AuthorizationOperation.Application.UserCases.FindAll.Queries
                 Created = x.Created
             }).ToList();
 
-            return result;
+            return Task.FromResult(result);
         }
     }
 }

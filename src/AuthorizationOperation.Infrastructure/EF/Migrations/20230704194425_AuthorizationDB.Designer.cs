@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthorizationOperation.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(AuthorizationDbContext))]
-    [Migration("20230703222053_AuthorizationDB")]
+    [Migration("20230704194425_AuthorizationDB")]
     partial class AuthorizationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -14,73 +14,73 @@ namespace AuthorizationOperation.Infrastructure.Core
 
         public Repository(DbContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public void Add(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
+            this._context.Set<TEntity>().Add(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-            _context.Set<TEntity>().AddRange(entities);
+            this._context.Set<TEntity>().AddRange(entities);
         }
 
         public bool Contains(ISpecification<TEntity> specification = null)
         {
-            return Count(specification) > 0 ? true : false;
+            return this.Count(specification) > 0;
         }
 
         public bool Contains(Expression<Func<TEntity, bool>> predicate)
         {
-            return Count(predicate) > 0 ? true : false;
+            return this.Count(predicate) > 0;
         }
 
         public int Count(ISpecification<TEntity> specification = null)
         {
-            return ApplySpecification(specification).Count();
+            return this.ApplySpecification(specification).Count();
         }
 
         public int Count(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate).Count();
+            return this._context.Set<TEntity>().Where(predicate).Count();
         }
 
         public IEnumerable<TEntity> Find(ISpecification<TEntity> specification = null)
         {
-            return ApplySpecification(specification);
+            return this.ApplySpecification(specification);
         }
 
         public TEntity FindById(int id)
         {
-            return _context.Set<TEntity>().Find(id);
+            return this._context.Set<TEntity>().Find(id);
         }
 
         public TEntity FindById(uint id)
         {
-            return _context.Set<TEntity>().Find(id);
+            return this._context.Set<TEntity>().Find(id);
         }
 
         public void Remove(TEntity entity)
         {
-            _context.Set<TEntity>().Remove(entity);
+            this._context.Set<TEntity>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            _context.Set<TEntity>().RemoveRange(entities);
+            this._context.Set<TEntity>().RemoveRange(entities);
         }
 
         public void Update(TEntity entity)
         {
-            _context.Set<TEntity>().Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            this._context.Set<TEntity>().Attach(entity);
+            this._context.Entry(entity).State = EntityState.Modified;
         }
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> spec)
         {
-            return SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), spec);
+            return SpecificationEvaluator<TEntity>.GetQuery(this._context.Set<TEntity>().AsQueryable(), spec);
         }
     }
 }

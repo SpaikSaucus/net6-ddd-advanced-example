@@ -17,15 +17,11 @@ namespace AuthorizationOperation.Domain.Authorization.Queries
             }
             else 
             {
-                base.AddCriteria(x => (x.Created >= DateTime.Today 
-                        && x.Status.Id == AuthorizationStatusEnum.AUTHORIZED 
-                        || x.Status.Id == AuthorizationStatusEnum.CANCELLED
-                    ) || x.Status.Id == AuthorizationStatusEnum.WAITING_FOR_SIGNERS
+                base.AddCriteria(x => x.Status.Id == AuthorizationStatusEnum.WAITING_FOR_SIGNERS
+                        || (x.Created >= DateTime.Today && x.Status.Id == AuthorizationStatusEnum.AUTHORIZED || x.Status.Id == AuthorizationStatusEnum.CANCELLED)
                 );
             }
 
-#warning Agregar el include a la lista de firmantes
-            //base.AddInclude(b => b.Address);
             base.ApplyPaging(skip, take);
         }
     }

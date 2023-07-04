@@ -27,20 +27,27 @@ namespace AuthorizationOperation.Application.UserCases.FindOne.Queries
             this.logger = logger;
         }
 
-        public async Task<AuthorizationResponse> Handle(AuthorizationGetQuery request, CancellationToken cancellationToken)
+        public Task<AuthorizationResponse> Handle(AuthorizationGetQuery request, CancellationToken cancellationToken)
         {
             this.logger.LogDebug("call handle AuthorizationGetQueryHandler.");
 
             var spec = new AuthorizationUUIDSpecification(request.UUID);
             var authorization = this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefault();
-
-            return new AuthorizationResponse()
+            if (authorization != null)
             {
-                Id = authorization.Id,
-                Customer = authorization.Customer,
-                Status = authorization.Status.ToString(),
-                Created = authorization.Created
-            };
+                return Task.FromResult(new AuthorizationResponse()
+                {
+                    Id = authorization.Id,
+                    UUID = authorization.UUID,
+                    Customer = authorization.Customer,
+                    Status = authorization.Status.Name.ToString(),
+                    Created = authorization.Created
+                });
+            }
+            else 
+            {
+                return Task.FromResult<AuthorizationResponse>(null);
+            }
         }
     }
 }

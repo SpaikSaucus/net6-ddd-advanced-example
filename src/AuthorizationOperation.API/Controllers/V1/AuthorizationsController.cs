@@ -33,6 +33,7 @@ namespace AuthorizationOperation.API.Controllers.V1.Customers
         public async Task<IActionResult> Get(uint id)
         {
             var response = await this.mediator.Send(new AuthorizationGetQueryV1() { Id = id });
+            if (response == null) return this.NotFound();
             return this.Ok(response);
         }
     }

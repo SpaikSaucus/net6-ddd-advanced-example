@@ -1,15 +1,15 @@
 ﻿using AuthorizationOperation.Domain.Authorization.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using System;
+using System.Linq;
 using System.Reflection;
 
 namespace AuthorizationOperation.Infrastructure.EF
 {
     public class AuthorizationDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseMySQL("server=localhost;port=3306;user=root;password=Root1234Admin;database=authorization_db");
-        }
+        public AuthorizationDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Authorization> Authorizations { get; set; }
 
@@ -17,6 +17,20 @@ namespace AuthorizationOperation.Infrastructure.EF
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+        }
+    }
+
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AuthorizationDbContext>
+    {
+        public AuthorizationDbContext CreateDbContext(string[] args)
+        {
+            if (args == null || args.Length != 1)
+                throw new Exception("ConnectionString is not found");
+
+            var connectionString = args[0];
+            var builder = new DbContextOptionsBuilder<AuthorizationDbContext>();
+            builder.UseMySQL(connectionString);
+            return new AuthorizationDbContext(builder.Options);
         }
     }
 }

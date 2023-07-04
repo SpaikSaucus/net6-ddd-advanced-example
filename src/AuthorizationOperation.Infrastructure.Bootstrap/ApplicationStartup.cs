@@ -63,7 +63,10 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap
                 o.Filters.Add(new ProducesResponseTypeAttribute(500));
             });
 
-            services.AddEntityFrameworkMySQL().AddDbContext<AuthorizationDbContext>();
+            services.AddEntityFrameworkMySQL().AddDbContext<AuthorizationDbContext>(opt =>
+            {
+                opt.UseMySQL(this.configuration.GetValue<string>("ConnectionStrings"));
+            });
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }

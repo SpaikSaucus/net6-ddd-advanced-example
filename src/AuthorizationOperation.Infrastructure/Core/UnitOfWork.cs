@@ -2,6 +2,7 @@
 using AuthorizationOperation.Infrastructure.EF;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace AuthorizationOperation.Infrastructure.Core
 {
@@ -15,9 +16,9 @@ namespace AuthorizationOperation.Infrastructure.Core
             this.context = context;
         }
 
-        public int Complete()
+        public Task<int> Complete()
         {
-            return this.context.SaveChanges();
+            return this.context.SaveChangesAsync();
         }
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class

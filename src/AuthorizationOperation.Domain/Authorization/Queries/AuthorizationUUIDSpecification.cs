@@ -7,6 +7,7 @@ namespace AuthorizationOperation.Domain.Authorization.Queries
     {
         public AuthorizationUUIDSpecification(Guid uuid)
         {
+            base.AddInclude(x => x.Status);
             base.AddCriteria(x => x.UUID == uuid);
         }
     }
