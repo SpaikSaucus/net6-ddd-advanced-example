@@ -17,7 +17,29 @@ namespace AuthorizationOperation.Domain.Core
         public int Skip { get; private set; }
         public bool IsPagingEnabled { get; private set; } = false;
 
-        protected virtual void AddCriteria(Expression<Func<T, bool>> criteria)
+        protected virtual Expression<Func<T, bool>> OrCriteria(Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+        {
+            if (left == null && right == null) throw new ArgumentException("At least one argument must not be null");
+            if (left == null) return right;
+            if (right == null) return left;
+
+            var parameter = Expression.Parameter(typeof(T), "p");
+            var combined = new ParameterReplacer(parameter).Visit(Expression.OrElse(left.Body, right.Body));
+            return Expression.Lambda<Func<T, bool>>(combined, parameter);
+        }
+
+        protected virtual Expression<Func<T, bool>> AndCriteria(Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
+        {
+            if (left == null && right == null) throw new ArgumentException("At least one argument must not be null");
+            if (left == null) return right;
+            if (right == null) return left;
+
+            var parameter = Expression.Parameter(typeof(T), "p");
+            var combined = new ParameterReplacer(parameter).Visit(Expression.AndAlso(left.Body, right.Body));
+            return Expression.Lambda<Func<T, bool>>(combined, parameter);
+        }
+
+        protected virtual void SetCriteria(Expression<Func<T, bool>> criteria)
         {
             this.Criteria = criteria;
         }
@@ -39,19 +61,34 @@ namespace AuthorizationOperation.Domain.Core
             this.IsPagingEnabled = true;
         }
 
-        protected virtual void ApplyOrderBy(Expression<Func<T, object>> orderByExpression)
+        protected virtual void SetOrderBy(Expression<Func<T, object>> orderByExpression)
         {
             this.OrderBy = orderByExpression;
         }
 
-        protected virtual void ApplyOrderByDescending(Expression<Func<T, object>> orderByDescendingExpression)
+        protected virtual void SetOrderByDescending(Expression<Func<T, object>> orderByDescendingExpression)
         {
             this.OrderByDescending = orderByDescendingExpression;
         }
 
-        protected virtual void ApplyGroupBy(Expression<Func<T, object>> groupByExpression)
+        protected virtual void SetGroupBy(Expression<Func<T, object>> groupByExpression)
         {
             this.GroupBy = groupByExpression;
+        }
+
+        class ParameterReplacer : ExpressionVisitor
+        {
+            readonly ParameterExpression parameter;
+
+            internal ParameterReplacer(ParameterExpression parameter)
+            {
+                this.parameter = parameter;
+            }
+
+            protected override Expression VisitParameter(ParameterExpression node)
+            {
+                return this.parameter;
+            }
         }
     }
 }

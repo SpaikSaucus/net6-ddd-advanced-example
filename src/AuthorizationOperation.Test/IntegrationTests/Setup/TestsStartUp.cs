@@ -2,11 +2,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AuthorizationOperation.Infrastructure.Bootstrap;
 
-namespace AuthorizationOperation.Test.Setup
+namespace AuthorizationOperation.Test.IntegrationTests.Setup
 {
     public class TestsStartUp : ApplicationStartup
     {
-        public TestsStartUp(IConfiguration configuration) 
+        public TestsStartUp(IConfiguration configuration)
             : base(configuration)
         {
 

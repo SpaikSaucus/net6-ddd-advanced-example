@@ -1,26 +1,25 @@
-using MediatR;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using AuthorizationOperation.Domain.Core;
+using AuthorizationOperation.Application.Shared.DTO;
 using AuthorizationOperation.Domain.Authorization.Models;
 using AuthorizationOperation.Domain.Authorization.Queries;
-using AuthorizationOperation.Application.Shared.ViewModels;
-using AuthorizationOperation.Application.UserCases.FindAll.ViewModels;
+using AuthorizationOperation.Domain.Core;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AuthorizationOperation.Application.UserCases.FindAll.Queries
 {
-    public class AuthorizationGetAllQuery : IRequest<AuthorizationPageResponse>
+    public class AuthorizationGetAllQuery : IRequest<PageDto<Authorization>>
     {
         public ushort Offset { get; set; }
         public ushort Limit { get; set; }
         public string Sort { get; set; }
-        public AuthorizationCriteriaRequest Criteria { get; set; }
+        public List<AuthorizationStatusEnum> StatusIn { get; set; }
+        public bool StatusInDefaultSelected { get; set; }
     }
 
-    public class AuthorizationGetAllQueryHandler : IRequestHandler<AuthorizationGetAllQuery, AuthorizationPageResponse>
+    public class AuthorizationGetAllQueryHandler : IRequestHandler<AuthorizationGetAllQuery, PageDto<Authorization>>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly ILogger<AuthorizationGetAllQueryHandler> logger;
@@ -31,42 +30,20 @@ namespace AuthorizationOperation.Application.UserCases.FindAll.Queries
             this.logger = logger;
         }
 
-        public Task<AuthorizationPageResponse> Handle(AuthorizationGetAllQuery request, CancellationToken cancellationToken)
+        public Task<PageDto<Authorization>> Handle(AuthorizationGetAllQuery request, CancellationToken cancellationToken)
         {
-            var listStatus = new List<AuthorizationStatusEnum>();
+            this.logger.LogDebug("call handle AuthorizationGetAllQueryHandler.");
 
-            if (!request.Criteria.listStatus.Contains(EnumStatusRequest.DEFAULT))
-            {
-                if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.CANCELLED))
-                    listStatus.Add(AuthorizationStatusEnum.CANCELLED);
+            if (request.StatusInDefaultSelected)
+                request.StatusIn = new List<AuthorizationStatusEnum>();
 
-                if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.WAITING_FOR_SIGNERS))
-                    listStatus.Add(AuthorizationStatusEnum.WAITING_FOR_SIGNERS);
-
-                if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.AUTHORIZED))
-                    listStatus.Add(AuthorizationStatusEnum.AUTHORIZED);
-
-                if (request.Criteria.listStatus.Any(x => x == EnumStatusRequest.EXPIRED))
-                    listStatus.Add(AuthorizationStatusEnum.EXPIRED);
-            }
-
-            var result = new AuthorizationPageResponse();
-            var spec = new AuthorizationsPaginatedSpecification(request.Offset, request.Limit, listStatus);
+            var result = new PageDto<Authorization>();
+            var spec = new AuthorizationsPaginatedSpecification(request.Offset, request.Limit, request.StatusIn);
 
             result.Total = this.unitOfWork.Repository<Authorization>().Count(spec.Criteria);
             result.Limit = request.Limit;
             result.Offset = request.Offset;
-
-            var page = this.unitOfWork.Repository<Authorization>().Find(spec);
-
-
-            result.Authorizations = page.Select(x => new AuthorizationResponse()
-            {
-                Id = x.Id,
-                Status = x.Status.Name,
-                Customer = x.Customer,
-                Created = x.Created
-            }).ToList();
+            result.Items = this.unitOfWork.Repository<Authorization>().Find(spec);
 
             return Task.FromResult(result);
         }

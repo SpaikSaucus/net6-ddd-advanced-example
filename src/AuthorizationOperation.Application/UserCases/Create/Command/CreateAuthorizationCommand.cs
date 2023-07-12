@@ -1,5 +1,4 @@
-﻿using AuthorizationOperation.Application.UserCases.Create.ViewModels;
-using AuthorizationOperation.Application.UserCases.FindOne.Queries;
+﻿using AuthorizationOperation.Application.UserCases.FindOne.Queries;
 using AuthorizationOperation.Domain.Authorization.Models;
 using AuthorizationOperation.Domain.Core;
 using MediatR;
@@ -10,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace AuthorizationOperation.Application.UserCases.Create.Command
 {
-    public class CreateAuthorizationCommand : IRequest<CreateAuthorizationResponse>
+    public class CreateAuthorizationCommand : IRequest<Authorization>
     {
-        public CreateAuthorizationRequest Request { get; set; }
+        public Guid UUID { get; set; }
+
+        public string Customer { get; set; }
     }
 
 
-    public class CreateAuthorizationCommandHandler : IRequestHandler<CreateAuthorizationCommand, CreateAuthorizationResponse>
+    public class CreateAuthorizationCommandHandler : IRequestHandler<CreateAuthorizationCommand, Authorization>
     {
         private const string messageExistsAuthorization = "Authorization {0} already exists in status {1} and was created {2}";
         private readonly IUnitOfWork unitOfWork;
@@ -30,26 +31,26 @@ namespace AuthorizationOperation.Application.UserCases.Create.Command
             this.mediator = mediator;
         }
 
-        public async Task<CreateAuthorizationResponse> Handle(CreateAuthorizationCommand cmd, CancellationToken cancellationToken)
+        public async Task<Authorization> Handle(CreateAuthorizationCommand cmd, CancellationToken cancellationToken)
         {
-            var authorizationExists = await this.mediator.Send(new AuthorizationGetQuery() { UUID = cmd.Request.UUID }, cancellationToken);
+            var authorizationExists = await this.mediator.Send(new AuthorizationGetQuery() { UUID = cmd.UUID }, cancellationToken);
             if (authorizationExists != null) 
             {
                 this.logger.LogInformation(messageExistsAuthorization, authorizationExists.UUID, authorizationExists.Status, authorizationExists.Created);
-                return new CreateAuthorizationResponse() { Id = authorizationExists.Id, Status = authorizationExists.Status };
+                return authorizationExists;
             }
 
             var authorization = new Authorization()
             {
-                UUID = cmd.Request.UUID,
-                Customer = cmd.Request.Customer,
+                UUID = cmd.UUID,
+                Customer = cmd.Customer,
                 Created = DateTime.UtcNow
             };
 
             this.unitOfWork.Repository<Authorization>().Add(authorization);
             await this.unitOfWork.Complete();
 
-            return new CreateAuthorizationResponse() { Id = authorization.Id, Status = AuthorizationStatusEnum.WAITING_FOR_SIGNERS.ToString() };
+            return authorization;
         }
     }
 }

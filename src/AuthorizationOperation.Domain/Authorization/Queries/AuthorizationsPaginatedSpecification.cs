@@ -1,7 +1,7 @@
-﻿using AuthorizationOperation.Domain.Core;
-using AuthorizationOperation.Domain.Authorization.Models;
-using System.Collections.Generic;
+﻿using AuthorizationOperation.Domain.Authorization.Models;
+using AuthorizationOperation.Domain.Core;
 using System;
+using System.Collections.Generic;
 
 namespace AuthorizationOperation.Domain.Authorization.Queries
 {
@@ -13,11 +13,11 @@ namespace AuthorizationOperation.Domain.Authorization.Queries
 
             if (listStatus.Count > 0)
             {
-                base.AddCriteria(x => listStatus.Contains(x.Status.Id));
+                base.SetCriteria(x => listStatus.Contains(x.Status.Id));
             }
             else 
             {
-                base.AddCriteria(x => x.Status.Id == AuthorizationStatusEnum.WAITING_FOR_SIGNERS
+                base.SetCriteria(x => x.Status.Id == AuthorizationStatusEnum.WAITING_FOR_SIGNERS
                         || (x.Created >= DateTime.Today && x.Status.Id == AuthorizationStatusEnum.AUTHORIZED || x.Status.Id == AuthorizationStatusEnum.CANCELLED)
                 );
             }

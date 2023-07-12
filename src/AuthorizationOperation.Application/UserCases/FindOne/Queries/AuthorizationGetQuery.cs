@@ -1,4 +1,3 @@
-using AuthorizationOperation.Application.Shared.ViewModels;
 using AuthorizationOperation.Domain.Authorization.Models;
 using AuthorizationOperation.Domain.Authorization.Queries;
 using AuthorizationOperation.Domain.Core;
@@ -11,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace AuthorizationOperation.Application.UserCases.FindOne.Queries
 {
-    public class AuthorizationGetQuery : IRequest<AuthorizationResponse>
+    public class AuthorizationGetQuery : IRequest<Authorization>
     {
         public Guid UUID { get; set; }
     }
 
-    public class AuthorizationGetQueryHandler : IRequestHandler<AuthorizationGetQuery, AuthorizationResponse>
+    public class AuthorizationGetQueryHandler : IRequestHandler<AuthorizationGetQuery, Authorization>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly ILogger<AuthorizationGetQueryHandler> logger;
@@ -27,27 +26,12 @@ namespace AuthorizationOperation.Application.UserCases.FindOne.Queries
             this.logger = logger;
         }
 
-        public Task<AuthorizationResponse> Handle(AuthorizationGetQuery request, CancellationToken cancellationToken)
+        public Task<Authorization> Handle(AuthorizationGetQuery request, CancellationToken cancellationToken)
         {
             this.logger.LogDebug("call handle AuthorizationGetQueryHandler.");
 
-            var spec = new AuthorizationUUIDSpecification(request.UUID);
-            var authorization = this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefault();
-            if (authorization != null)
-            {
-                return Task.FromResult(new AuthorizationResponse()
-                {
-                    Id = authorization.Id,
-                    UUID = authorization.UUID,
-                    Customer = authorization.Customer,
-                    Status = authorization.Status.Name.ToString(),
-                    Created = authorization.Created
-                });
-            }
-            else 
-            {
-                return Task.FromResult<AuthorizationResponse>(null);
-            }
+            var spec = new AuthorizationGetSpecification(default, request.UUID);
+            return Task.FromResult(this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefault());
         }
     }
 }

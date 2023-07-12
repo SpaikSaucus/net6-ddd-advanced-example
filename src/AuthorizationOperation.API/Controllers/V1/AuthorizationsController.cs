@@ -1,4 +1,4 @@
-using AuthorizationOperation.Application.Shared.ViewModels;
+using AuthorizationOperation.API.ViewModels;
 using AuthorizationOperation.Application.UserCases.FindOne.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -23,18 +23,31 @@ namespace AuthorizationOperation.API.Controllers.V1.Customers
         }
 
         /// <summary>
-        /// 
+        /// Returns one Authorization according to ID
         /// </summary>
-        /// <remarks></remarks>
-        /// <returns></returns>
-        [HttpGet]
+        /// <param name="id" example="1">Identifier from Authorization</param>
+        /// <returns>Information result for one authorization</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/v1/Authorizations/1
+        /// </remarks>
+        /// <response code="200">Request successful</response>
+        /// <response code="401">The request is not validly authenticated</response>
+        /// <response code="403">The client is not authorized for using this operation</response>
+        /// <response code="404">The resource was not found</response>
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthorizationResponse))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
         public async Task<IActionResult> Get(uint id)
         {
-            var response = await this.mediator.Send(new AuthorizationGetQueryV1() { Id = id });
-            if (response == null) return this.NotFound();
-            return this.Ok(response);
+            var authorization = await this.mediator.Send(new AuthorizationGetQueryV1() { Id = id });
+            if (authorization == null) return this.NotFound();
+
+            return this.Ok(new AuthorizationResponse(authorization));
         }
     }
 }

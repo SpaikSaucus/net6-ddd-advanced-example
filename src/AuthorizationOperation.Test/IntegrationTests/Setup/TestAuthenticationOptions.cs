@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 
-namespace AuthorizationOperation.Test.Setup
+namespace AuthorizationOperation.Test.IntegrationTests.Setup
 {
     public sealed class TestAuthenticationOptions : AuthenticationSchemeOptions
     {

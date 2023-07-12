@@ -49,7 +49,7 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceColl
                         }, 
                         new List<string>()
                     }
-                });           
+                });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{GetApplicationName()}.xml";
