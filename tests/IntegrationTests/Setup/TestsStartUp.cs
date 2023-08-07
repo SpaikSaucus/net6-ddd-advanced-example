@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AuthorizationOperation.Infrastructure.Bootstrap;
 
-namespace AuthorizationOperation.Test.IntegrationTests.Setup
+namespace AuthorizationOperation.IntegrationTests.Setup
 {
     public class TestsStartUp : ApplicationStartup
     {

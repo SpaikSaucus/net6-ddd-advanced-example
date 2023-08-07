@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-core", "2-core", "{97BA53
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-infrastructure", "3-infrastructure", "{5CEB46A9-947A-478A-9BC1-B02BB4940114}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DA7A91E8-43BA-4736-BDED-EA303615EAFC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DA7A91E8-43BA-4736-BDED-EA303615EAFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configuration", "{EB789F45-2444-470A-A02D-7868737A6E57}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,19 +18,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configurat
 		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.API", "AuthorizationOperation.API\AuthorizationOperation.API.csproj", "{B6F0CC6F-25F3-4775-AC4C-B35209C691A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.API", "src\AuthorizationOperation.API\AuthorizationOperation.API.csproj", "{B6F0CC6F-25F3-4775-AC4C-B35209C691A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Application", "AuthorizationOperation.Application\AuthorizationOperation.Application.csproj", "{0B40FB68-1AA7-4D6F-AEBC-F23E79E3BF48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Application", "src\AuthorizationOperation.Application\AuthorizationOperation.Application.csproj", "{0B40FB68-1AA7-4D6F-AEBC-F23E79E3BF48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Domain", "AuthorizationOperation.Domain\AuthorizationOperation.Domain.csproj", "{E05E5432-2947-40DC-92E8-E3AB4BC85CD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Domain", "src\AuthorizationOperation.Domain\AuthorizationOperation.Domain.csproj", "{E05E5432-2947-40DC-92E8-E3AB4BC85CD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Infrastructure", "AuthorizationOperation.Infrastructure\AuthorizationOperation.Infrastructure.csproj", "{37DC6D6E-DE00-4F6D-88BB-9BEBB66C2CBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Infrastructure", "src\AuthorizationOperation.Infrastructure\AuthorizationOperation.Infrastructure.csproj", "{37DC6D6E-DE00-4F6D-88BB-9BEBB66C2CBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Infrastructure.Bootstrap", "AuthorizationOperation.Infrastructure.Bootstrap\AuthorizationOperation.Infrastructure.Bootstrap.csproj", "{CBEE1056-A187-487B-8625-75D94A1EC3E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Infrastructure.Bootstrap", "src\AuthorizationOperation.Infrastructure.Bootstrap\AuthorizationOperation.Infrastructure.Bootstrap.csproj", "{CBEE1056-A187-487B-8625-75D94A1EC3E5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.entrypoint", "1.entrypoint", "{0F16E634-D2E6-4658-A6C8-55E4DE3824C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{6ABA9308-24ED-4E51-90E3-390817918183}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationOperation.Test", "AuthorizationOperation.Test\AuthorizationOperation.Test.csproj", "{2B6BF57A-8F85-4023-9747-20AE95209BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{2334C195-72E0-417B-827C-A04CF1006A43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,10 +58,14 @@ Global
 		{CBEE1056-A187-487B-8625-75D94A1EC3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBEE1056-A187-487B-8625-75D94A1EC3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBEE1056-A187-487B-8625-75D94A1EC3E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B6BF57A-8F85-4023-9747-20AE95209BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B6BF57A-8F85-4023-9747-20AE95209BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B6BF57A-8F85-4023-9747-20AE95209BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B6BF57A-8F85-4023-9747-20AE95209BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABA9308-24ED-4E51-90E3-390817918183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABA9308-24ED-4E51-90E3-390817918183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABA9308-24ED-4E51-90E3-390817918183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABA9308-24ED-4E51-90E3-390817918183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2334C195-72E0-417B-827C-A04CF1006A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2334C195-72E0-417B-827C-A04CF1006A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2334C195-72E0-417B-827C-A04CF1006A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2334C195-72E0-417B-827C-A04CF1006A43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,8 +79,8 @@ Global
 		{E05E5432-2947-40DC-92E8-E3AB4BC85CD9} = {97BA533E-664B-4B1C-AC48-3C3B00A40DC8}
 		{37DC6D6E-DE00-4F6D-88BB-9BEBB66C2CBE} = {5CEB46A9-947A-478A-9BC1-B02BB4940114}
 		{CBEE1056-A187-487B-8625-75D94A1EC3E5} = {5CEB46A9-947A-478A-9BC1-B02BB4940114}
-		{0F16E634-D2E6-4658-A6C8-55E4DE3824C6} = {DA7A91E8-43BA-4736-BDED-EA303615EAFC}
-		{2B6BF57A-8F85-4023-9747-20AE95209BBE} = {0F16E634-D2E6-4658-A6C8-55E4DE3824C6}
+		{6ABA9308-24ED-4E51-90E3-390817918183} = {DA7A91E8-43BA-4736-BDED-EA303615EAFC}
+		{2334C195-72E0-417B-827C-A04CF1006A43} = {DA7A91E8-43BA-4736-BDED-EA303615EAFC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {55FEDAE4-770B-4B94-B912-0F157CC9141C}

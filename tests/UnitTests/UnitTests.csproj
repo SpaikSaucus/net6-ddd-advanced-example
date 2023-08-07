@@ -22,9 +22,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AuthorizationOperation.Application\AuthorizationOperation.Application.csproj" />
-    <ProjectReference Include="..\AuthorizationOperation.Domain\AuthorizationOperation.Domain.csproj" />
-    <ProjectReference Include="..\AuthorizationOperation.Infrastructure\AuthorizationOperation.Infrastructure.csproj" />
-    <ProjectReference Include="..\AuthorizationOperation.API\AuthorizationOperation.API.csproj" />
+    <ProjectReference Include="..\..\src\AuthorizationOperation.Application\AuthorizationOperation.Application.csproj" />
+    <ProjectReference Include="..\..\src\AuthorizationOperation.Domain\AuthorizationOperation.Domain.csproj" />
+    <ProjectReference Include="..\..\src\AuthorizationOperation.Infrastructure\AuthorizationOperation.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\AuthorizationOperation.API\AuthorizationOperation.API.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\" />
   </ItemGroup>
 </Project>
