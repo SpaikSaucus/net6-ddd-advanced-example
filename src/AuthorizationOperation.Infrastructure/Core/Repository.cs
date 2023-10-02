@@ -29,24 +29,17 @@ namespace AuthorizationOperation.Infrastructure.Core
             this._context.Set<TEntity>().AddRange(entities);
         }
 
-        public bool Contains(ISpecification<TEntity> specification = null)
-        {
-            return this.Count(specification) > 0;
-        }
-
         public bool Contains(Expression<Func<TEntity, bool>> predicate)
         {
             return this.Count(predicate) > 0;
         }
 
-        public int Count(ISpecification<TEntity> specification = null)
-        {
-            return this.ApplySpecification(specification).Count();
-        }
-
         public int Count(Expression<Func<TEntity, bool>> predicate)
         {
-            return this._context.Set<TEntity>().Where(predicate).Count();
+            if (predicate != null)
+                return this._context.Set<TEntity>().Where(predicate).Count();
+            else
+                return this._context.Set<TEntity>().Count();
         }
 
         public IEnumerable<TEntity> Find(ISpecification<TEntity> specification = null)
