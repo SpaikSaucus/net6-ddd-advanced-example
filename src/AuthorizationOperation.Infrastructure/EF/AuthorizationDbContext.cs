@@ -1,8 +1,8 @@
 ﻿using AuthorizationOperation.Domain.Authorization.Models;
+using AuthorizationOperation.Domain.User.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
-using System.Linq;
 using System.Reflection;
 
 namespace AuthorizationOperation.Infrastructure.EF
@@ -11,6 +11,7 @@ namespace AuthorizationOperation.Infrastructure.EF
     {
         public AuthorizationDbContext(DbContextOptions options) : base(options) { }
 
+		public DbSet<User> Users { get; set; }
         public DbSet<Authorization> Authorizations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

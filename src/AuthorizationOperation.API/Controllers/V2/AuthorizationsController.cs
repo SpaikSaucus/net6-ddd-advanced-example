@@ -2,7 +2,9 @@ using AuthorizationOperation.API.ViewModels;
 using AuthorizationOperation.Application.UserCases.Create.Command;
 using AuthorizationOperation.Application.UserCases.FindAll.Queries;
 using AuthorizationOperation.Application.UserCases.FindOne.Queries;
+using AuthorizationOperation.Infrastructure.Services;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,13 +18,16 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthorizationsController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly ICurrentUserAccessor currentUser;
 
-        public AuthorizationsController(IMediator mediator)
+        public AuthorizationsController(IMediator mediator, ICurrentUserAccessor currentUser)
         {
             this.mediator = mediator;
+            this.currentUser = currentUser;
         }
 
         /// <summary>
@@ -49,6 +54,9 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
         public async Task<IActionResult> GetOne(Guid uuid)
         {
+            // TODO: Can get GUID and validate or include business logical from Authorization Token
+            // var guid = this.currentUser.User.Guid;
+
             var authorization = await this.mediator.Send(new AuthorizationGetQuery() { UUID = uuid });
             if (authorization == null) return this.NotFound();
 
@@ -85,6 +93,9 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
         public async Task<IActionResult> GetAll([FromBody] AuthorizationCriteriaRequest criteria, string sort, ushort offset, ushort limit)
         {
+            // TODO: Can get GUID and validate or include business logical from Authorization Token
+            // var guid = this.currentUser.User.Guid;
+
             var query = new AuthorizationGetAllQuery()
             {
                 Limit = limit,
@@ -125,6 +136,9 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Create([FromBody] CreateAuthorizationRequest req)
         {
+            // TODO: Can get GUID and validate or include business logical from Authorization Token
+            // var guid = this.currentUser.User.Guid;
+
             var response = await this.mediator.Send(new CreateAuthorizationCommand()
             {
                 Customer = req.Customer,

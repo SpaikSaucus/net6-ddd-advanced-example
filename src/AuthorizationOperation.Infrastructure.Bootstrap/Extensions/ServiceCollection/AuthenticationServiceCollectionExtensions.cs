@@ -15,13 +15,13 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceColl
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false, // TODO: Change to TRUE in production
+                        ValidateAudience = false, // TODO: Change to TRUE in production
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = configuration["AppSettings:Domain"],
                         ValidAudience = configuration["AppSettings:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AppSettings:SymmetricKey"])) //TODO: you can't have secrets in your Code (in this case, in the AppSettings)
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AppSettings:SymmetricKey"])), //TODO: you can't have secrets in your Code (in this case, in the AppSettings)
                     };
                 });
         }

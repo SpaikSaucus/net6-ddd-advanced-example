@@ -80,7 +80,9 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap
             app.UseCorsExtension();
 
             app.UseRouting();
+
             app.UseAuthentication();
+			app.UseAuthorization();
             app.UseHealthChecksExtension();
             app.UseResponseCompression();
             app.UseSwaggerExtension(provider);

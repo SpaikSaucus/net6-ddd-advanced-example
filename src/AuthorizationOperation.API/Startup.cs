@@ -22,7 +22,8 @@ namespace AuthorizationOperation.API
         // For more information on how to configure your application visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            this.ConfigureServicesAux(services);
+            this.applicationStartup.ConfigureAuthorization(services);
+            this.applicationStartup.ConfigureServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +43,6 @@ namespace AuthorizationOperation.API
         public void ConfigureContainer(ContainerBuilder builder)
         {
             this.applicationStartup.ConfigureContainer(builder);
-        }
-
-        protected virtual void ConfigureServicesAux(IServiceCollection services)
-        {
-            this.applicationStartup.ConfigureServices(services);
         }
     }
 }

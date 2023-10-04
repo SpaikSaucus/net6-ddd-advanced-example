@@ -1,4 +1,5 @@
 using AuthorizationOperation.Domain.Core;
+using AuthorizationOperation.Infrastructure.Bootstrap.Security;
 using AuthorizationOperation.Infrastructure.Core;
 using Autofac;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,10 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.AutofacModules
         {
             builder.RegisterType<UnitOfWork>()
              .As<IUnitOfWork>()
+             .InstancePerLifetimeScope();
+
+            builder.RegisterType<JwtProvider>()
+             .As<ITokenProvider>()
              .InstancePerLifetimeScope();
         }
     }
