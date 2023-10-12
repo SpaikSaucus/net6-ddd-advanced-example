@@ -28,8 +28,8 @@ namespace AuthorizationOperation.API.Controllers.V2
         {
             var cmd = new UserLoginCommand()
             {
-                UserName = req.userName,
-                Password = req.password
+                UserName = req.UserName,
+                Password = req.Password
             };
             var result = await mediator.Send(cmd);
             return Ok(result);

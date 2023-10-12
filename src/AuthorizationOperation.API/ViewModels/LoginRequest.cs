@@ -9,11 +9,11 @@ namespace AuthorizationOperation.API.ViewModels
         /// 
         /// </summary>
         /// <example>userName</example>
-        public string userName { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 
         /// </summary>
         /// <example>my_password</example>
-        public string password { get; set; }
+        public string Password { get; set; }
     }
 }

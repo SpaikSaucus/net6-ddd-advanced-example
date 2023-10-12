@@ -1,6 +1,7 @@
 using AuthorizationOperation.API.ViewModels;
 using AuthorizationOperation.Application.UserCases.FindOne.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace AuthorizationOperation.API.Controllers.V1.Customers
     [ApiVersion("1.0", Deprecated = true)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthorizationsController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -30,7 +32,8 @@ namespace AuthorizationOperation.API.Controllers.V1.Customers
         /// <remarks>
         /// Sample request:
         ///
-        ///     GET /api/v1/Authorizations/1
+        ///     GET /api/v1/authorizations/1
+        ///         header Authorization: Bearer XXXXXXXXXXXXXXX
         /// </remarks>
         /// <response code="200">Request successful</response>
         /// <response code="401">The request is not validly authenticated</response>

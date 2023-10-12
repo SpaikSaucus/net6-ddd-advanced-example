@@ -40,7 +40,8 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         /// 
         /// Sample request:
         ///
-        ///     GET /api/v1/Authorizations/4bac8878-d319-4a8d-9648-87da3fbf2cc7
+        ///     GET /api/v1/authorizations/4bac8878-d319-4a8d-9648-87da3fbf2cc7
+        ///         header Authorization: Bearer XXXXXXXXXXXXXXX
         /// </remarks>
         /// <response code="200">Request successful</response>
         /// <response code="401">The request is not validly authenticated</response>
@@ -76,16 +77,17 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         /// 
         /// Sample request:
         ///
-        ///     GET /api/v2/Authorizations?sort=customer,asc;id,desc&amp;offset=0&amp;limit=200
+        ///     POST /api/v2/authorizations/findAllByCriteria?sort=customer,asc;id,desc&amp;offset=0&amp;limit=200
         ///     {
         ///        "statusIn": 4
         ///     }
+        ///     header Authorization: Bearer XXXXXXXXXXXXXXX
         /// </remarks>
         /// <response code="200">Request successful</response>
         /// <response code="401">The request is not validly authenticated</response>
         /// <response code="403">The client is not authorized for using this operation</response>
         /// <response code="404">The resource was not found</response>
-        [HttpGet]
+        [HttpPost("findAllByCriteria")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthorizationPageResponse))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -119,11 +121,12 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
         /// 
         /// Sample request:
         ///
-        ///     POST /api/v2/Authorizations
+        ///     POST /api/v2/authorizations
         ///     {
         ///         "UUID": "12345678-1234-1234-1234-123456789126",
         ///         "Customer": "Customer1"
         ///     }
+        ///     header Authorization: Bearer XXXXXXXXXXXXXXX
         /// </remarks>
         /// <response code="201">Returns the newly created item</response>
         /// <response code="401">The request is not validly authenticated</response>
