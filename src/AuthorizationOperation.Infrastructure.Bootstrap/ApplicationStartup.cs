@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MySql.EntityFrameworkCore.Extensions;
 using AuthorizationOperation.Infrastructure.EF;
+using System.Text.Json;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap
 {
@@ -58,10 +59,13 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap
            
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Behaviors.ValidatorBehavior<,>).Assembly));
             services.AddControllers(o =>
-            {
-                o.Filters.Add(new ProducesResponseTypeAttribute(400));
-                o.Filters.Add(new ProducesResponseTypeAttribute(500));
-            });
+                {
+                    o.Filters.Add(new ProducesResponseTypeAttribute(400));
+                    o.Filters.Add(new ProducesResponseTypeAttribute(500));
+                }).AddJsonOptions(o =>
+                {
+                    o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                });
 
             services.AddEntityFrameworkMySQL().AddDbContext<AuthorizationDbContext>(opt =>
             {
