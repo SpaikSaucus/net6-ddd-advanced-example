@@ -14,7 +14,7 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceColl
                 .As<ICurrentUserAccessor>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterModule(new InfrastructureModule(configuration));
+            builder.RegisterModule(new InfrastructureModule());
             builder.RegisterModule(new MediatorModule(configuration.GetValue("CommandLoggingEnabled", false)));                   
         }
     }
