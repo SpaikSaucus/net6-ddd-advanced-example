@@ -1,13 +1,15 @@
 using AuthorizationOperation.API.ViewModels;
-using AuthorizationOperation.Application.UserCases.Create.Command;
+using AuthorizationOperation.Application.UserCases.Create.Commands;
 using AuthorizationOperation.Application.UserCases.FindAll.Queries;
 using AuthorizationOperation.Application.UserCases.FindOne.Queries;
-using AuthorizationOperation.Infrastructure.Services;
+using AuthorizationOperation.Application.UserCases.Report.Commands;
+using AuthorizationOperation.Infrastructure.Services.Accessor;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace AuthorizationOperation.API.Controllers.V2.Customers
@@ -148,6 +150,41 @@ namespace AuthorizationOperation.API.Controllers.V2.Customers
                 UUID = req.UUID
             });
             return this.Created($"/api/v2/Authorizations/{req.UUID}", new CreateAuthorizationResponse(response.Id));
+        }
+
+        /// <summary>
+        /// Download Report Excel
+        /// </summary>
+        /// <returns>Report Excel</returns>
+        /// <remarks>
+        /// This method exists only in the current version, to show how the same "Controller" can evolve and maintain the versioning
+        /// 
+        /// Sample request:
+        ///
+        ///     POST /api/v2/authorizations/report/excel
+        ///     {
+        ///        "statusIn": 4
+        ///     }
+        ///     header Authorization: Bearer XXXXXXXXXXXXXXX
+        /// </remarks>
+        /// <response code="200">Request successful</response>
+        /// <response code="401">The request is not validly authenticated</response>
+        /// <response code="403">The client is not authorized for using this operation</response>
+        /// <response code="404">The resource was not found</response>
+        [HttpPost("report/excel")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(File))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> ReportExcel([FromBody] AuthorizationCriteriaRequest criteria)
+        {
+            var cmd = new ReportFileExcelCommand()
+            {
+                StatusIn = criteria.ConvertToEnum()
+            };
+
+            var stream = await this.mediator.Send(cmd);
+            return this.File(stream.ToArray(), "application/octet-stream", "reportAuthOp.xlsx");
         }
     }
 }

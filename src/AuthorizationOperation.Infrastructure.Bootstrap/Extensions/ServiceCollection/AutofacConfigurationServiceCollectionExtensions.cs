@@ -2,7 +2,7 @@ using Autofac;
 using Microsoft.Extensions.Configuration;
 using AuthorizationOperation.Infrastructure.Bootstrap.AutofacModules;
 using AuthorizationOperation.Infrastructure.Bootstrap.Security;
-using AuthorizationOperation.Infrastructure.Services;
+using AuthorizationOperation.Infrastructure.Services.Accessor;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceCollection
 {
@@ -15,7 +15,8 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceColl
                 .InstancePerLifetimeScope();
 
             builder.RegisterModule(new InfrastructureModule());
-            builder.RegisterModule(new MediatorModule(configuration.GetValue("CommandLoggingEnabled", false)));                   
+            builder.RegisterModule(new MediatorModule(configuration.GetValue("CommandLoggingEnabled", false)));
+            builder.RegisterModule(new ReportFileModule());
         }
     }
 }
