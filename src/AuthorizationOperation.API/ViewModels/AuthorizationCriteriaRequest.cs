@@ -11,15 +11,15 @@ namespace AuthorizationOperation.API.ViewModels
         private enum EnumStatusRequest
         {
             [Description("DEFAULT")]
-            DEFAULT,
+            DEFAULT = 0,
             [Description("WAITING_FOR_SIGNERS")]
-            WAITING_FOR_SIGNERS,
+            WAITING_FOR_SIGNERS = 1,
             [Description("AUTHORIZED")]
-            AUTHORIZED,
+            AUTHORIZED = 2,
             [Description("EXPIRED")]
-            EXPIRED,
+            EXPIRED = 3,
             [Description("CANCELLED")]
-            CANCELLED
+            CANCELLED = 4
         }
 
         private List<EnumStatusRequest> listStatusIn = new();

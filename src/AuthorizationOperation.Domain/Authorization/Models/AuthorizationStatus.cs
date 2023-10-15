@@ -14,9 +14,9 @@ namespace AuthorizationOperation.Domain.Authorization.Models
 
     public enum AuthorizationStatusEnum
     {
-        WAITING_FOR_SIGNERS,
-        AUTHORIZED,
-        EXPIRED,
-        CANCELLED
+        WAITING_FOR_SIGNERS = 1,
+        AUTHORIZED = 2,
+        EXPIRED = 3,
+        CANCELLED = 4
     }
 }

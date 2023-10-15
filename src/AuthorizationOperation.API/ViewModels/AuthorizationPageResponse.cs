@@ -1,4 +1,4 @@
-﻿using AuthorizationOperation.Application.Shared.DTO;
+﻿using AuthorizationOperation.Application.Shared.DTOs;
 using AuthorizationOperation.Domain.Authorization.Models;
 using System.Collections.Generic;
 using System.Linq;

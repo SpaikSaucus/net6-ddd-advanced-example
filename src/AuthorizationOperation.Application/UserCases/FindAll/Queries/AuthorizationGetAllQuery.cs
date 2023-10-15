@@ -1,4 +1,4 @@
-using AuthorizationOperation.Application.Shared.DTO;
+using AuthorizationOperation.Application.Shared.DTOs;
 using AuthorizationOperation.Domain.Authorization.Models;
 using AuthorizationOperation.Domain.Authorization.Queries;
 using AuthorizationOperation.Domain.Core;

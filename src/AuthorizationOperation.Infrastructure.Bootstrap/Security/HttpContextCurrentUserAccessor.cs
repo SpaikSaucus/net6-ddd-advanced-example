@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
-using AuthorizationOperation.Infrastructure.Services;
 using System;
 using AuthorizationOperation.Domain.Core;
+using AuthorizationOperation.Infrastructure.Services.Accessor;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap.Security
 {

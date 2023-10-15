@@ -1,6 +1,6 @@
 using AuthorizationOperation.API.ViewModels;
-using AuthorizationOperation.Application.UserCases.Login;
-using AuthorizationOperation.Infrastructure.Services;
+using AuthorizationOperation.Application.UserCases.Login.Commands;
+using AuthorizationOperation.Infrastructure.Services.Accessor;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

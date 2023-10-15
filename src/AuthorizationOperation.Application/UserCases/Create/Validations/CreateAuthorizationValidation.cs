@@ -1,4 +1,4 @@
-﻿using AuthorizationOperation.Application.UserCases.Create.Command;
+﻿using AuthorizationOperation.Application.UserCases.Create.Commands;
 using FluentValidation;
 
 namespace AuthorizationOperation.Application.UserCases.Create.Validations
