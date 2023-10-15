@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AuthorizationOperation.Application.Shared.DTO
+namespace AuthorizationOperation.Application.Shared.DTOs
 {
     public class PageDto<T> where T : class
     {

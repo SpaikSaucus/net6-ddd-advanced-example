@@ -1,4 +1,5 @@
 ﻿using AuthorizationOperation.Application.UserCases.FindOne.Queries;
+using AuthorizationOperation.Application.UserCases.Login.DTOs;
 using AuthorizationOperation.Domain.Core;
 using FluentValidation;
 using MediatR;
@@ -7,7 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AuthorizationOperation.Application.UserCases.Login
+namespace AuthorizationOperation.Application.UserCases.Login.Commands
 {
     public class UserLoginCommand : IRequest<string>
     {
@@ -43,9 +44,7 @@ namespace AuthorizationOperation.Application.UserCases.Login
         {
             var userExists = await this.mediator.Send(new UserGetQuery() { UserName = cmd.UserName, Password = cmd.Password }, cancellationToken);
             if (userExists == null)
-            {
                 throw new Exception("User " + cmd.UserName + " Unauthorized");
-            }
 
             var claims = new ClaimDto
             {

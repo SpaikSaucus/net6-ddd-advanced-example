@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AuthorizationOperation.Application.UserCases.Create.Command
+namespace AuthorizationOperation.Application.UserCases.Create.Commands
 {
     public class CreateAuthorizationCommand : IRequest<Authorization>
     {

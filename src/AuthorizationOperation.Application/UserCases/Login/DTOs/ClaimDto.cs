@@ -1,6 +1,6 @@
 ﻿using AuthorizationOperation.Domain.Core;
 
-namespace AuthorizationOperation.Application.UserCases.Login
+namespace AuthorizationOperation.Application.UserCases.Login.DTOs
 {
     public class ClaimDto : IUserInformation
     {

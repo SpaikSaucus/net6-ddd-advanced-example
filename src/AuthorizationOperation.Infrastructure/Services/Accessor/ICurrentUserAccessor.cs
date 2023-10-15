@@ -1,6 +1,6 @@
 using AuthorizationOperation.Domain.Core;
 
-namespace AuthorizationOperation.Infrastructure.Services
+namespace AuthorizationOperation.Infrastructure.Services.Accessor
 {
     public interface ICurrentUserAccessor
     {
