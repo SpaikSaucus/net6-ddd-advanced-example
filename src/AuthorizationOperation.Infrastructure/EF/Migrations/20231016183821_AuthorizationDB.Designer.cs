@@ -3,6 +3,7 @@ using System;
 using AuthorizationOperation.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthorizationOperation.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(AuthorizationDbContext))]
-    partial class AuthorizationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231016183821_AuthorizationDB")]
+    partial class AuthorizationDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,11 +40,6 @@ namespace AuthorizationOperation.Infrastructure.EF.Migrations
                     b.Property<ushort>("StatusId")
                         .HasColumnType("smallint unsigned")
                         .HasColumnName("status_id");
-
-                    b.Property<string>("UUID")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)")
-                        .HasColumnName("uuid");
 
                     b.HasKey("Id")
                         .HasName("pk_authorization_id");

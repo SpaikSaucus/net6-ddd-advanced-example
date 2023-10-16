@@ -8,15 +8,22 @@ namespace AuthorizationOperation.Infrastructure.EF.Config
     {
         public void Configure(EntityTypeBuilder<Authorization> builder)
         {
-            builder.Property(e => e.Id).IsRequired().HasConversion<int>();
-            builder.Property(e => e.UUID).IsRequired().HasConversion<string>();
-            builder.Property(e => e.StatusId).IsRequired().HasConversion<int>();
-            builder.Property(e => e.Created).IsRequired();
-            builder.Property(e => e.Customer).IsRequired();
+            builder.ToTable("authorization");
+
+            builder.Property(e => e.Id).HasColumnName("id").IsRequired().HasConversion<int>();
+            builder.Property(e => e.StatusId).HasColumnName("status_id").IsRequired().HasConversion<ushort>();
+            builder.Property(e => e.Created).HasColumnName("created").IsRequired();
+            builder.Property(e => e.Customer).HasColumnName("customer").IsRequired();
+            builder.Property(e => e.UUID).HasColumnName("uuid").IsRequired().HasConversion<string>();
+
+            builder.HasKey(e => e.Id).HasName("pk_authorization_id");
+
+            builder.HasIndex(e => e.StatusId).HasDatabaseName("ix_authorization_status_id");
 
             builder.HasOne(e => e.Status)
                 .WithMany()
-                .HasForeignKey(s => s.StatusId);
+                .HasForeignKey(s => s.StatusId)
+                .HasConstraintName("fk_authorization_authorization_status_status_id");
         }
     }
 }

@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "840b5506-46b5-405c-ad85-fe5f84faab07",
+		"name": "Net6Advance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10582959"
+	},
+	"item": [
+		{
+			"name": "OAuth Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/v2/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v2",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create AuthorizationOperation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkIjoiNjgwNjM5ZTktZGY1Yi0xMWViLTg3YjctMWMxYjBkOTdlYjNhIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwiZW1haWwiOiJhZG1pbkBwcnVlYmEuY29tIiwibmJmIjoxNjk3NDgyMDE3LCJleHAiOjE2OTc1Njg0MTcsImlhdCI6MTY5NzQ4MjAxN30.xesrhuwpltbXVV6dANcei8KurbWnQgVcRpBXXzWHZaE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"uuid\": \"12345678-1234-1234-1234-123456789128\",\r\n    \"customer\": \"Customer2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v2/authorizations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v2",
+						"authorizations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOne AuthorizationOperation V1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkIjoiNjgwNjM5ZTktZGY1Yi0xMWViLTg3YjctMWMxYjBkOTdlYjNhIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwiZW1haWwiOiJhZG1pbkBwcnVlYmEuY29tIiwibmJmIjoxNjk3NDgyMDE3LCJleHAiOjE2OTc1Njg0MTcsImlhdCI6MTY5NzQ4MjAxN30.xesrhuwpltbXVV6dANcei8KurbWnQgVcRpBXXzWHZaE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/authorizations/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"authorizations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOne AuthorizationOperation V2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkIjoiNjgwNjM5ZTktZGY1Yi0xMWViLTg3YjctMWMxYjBkOTdlYjNhIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwiZW1haWwiOiJhZG1pbkBwcnVlYmEuY29tIiwibmJmIjoxNjk3NDYwOTMwLCJleHAiOjE2OTc1NDczMzAsImlhdCI6MTY5NzQ2MDkzMH0.BQtEo-DAIJPMmYNFkPOQkhv_Ft7hQiy_CMURAY8c23c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/v2/authorizations/12345678-1234-1234-1234-123456789128",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v2",
+						"authorizations",
+						"12345678-1234-1234-1234-123456789128"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAll AuthorizationOperation V2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkIjoiNjgwNjM5ZTktZGY1Yi0xMWViLTg3YjctMWMxYjBkOTdlYjNhIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwiZW1haWwiOiJhZG1pbkBwcnVlYmEuY29tIiwibmJmIjoxNjk3NDYwOTMwLCJleHAiOjE2OTc1NDczMzAsImlhdCI6MTY5NzQ2MDkzMH0.BQtEo-DAIJPMmYNFkPOQkhv_Ft7hQiy_CMURAY8c23c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"statusIn\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v2/authorizations/findAllByCriteria?sort=customer,asc;id,desc&offset=0&limit=200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v2",
+						"authorizations",
+						"findAllByCriteria"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "customer,asc;id,desc"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report AuthorizationOperation V2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJndWlkIjoiNjgwNjM5ZTktZGY1Yi0xMWViLTg3YjctMWMxYjBkOTdlYjNhIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJmaXJzdF9uYW1lIjoiIiwibGFzdF9uYW1lIjoiIiwiZW1haWwiOiJhZG1pbkBwcnVlYmEuY29tIiwibmJmIjoxNjk3NDYwOTMwLCJleHAiOjE2OTc1NDczMzAsImlhdCI6MTY5NzQ2MDkzMH0.BQtEo-DAIJPMmYNFkPOQkhv_Ft7hQiy_CMURAY8c23c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"statusIn\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/v2/authorizations/report/excel",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v2",
+						"authorizations",
+						"report",
+						"excel"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

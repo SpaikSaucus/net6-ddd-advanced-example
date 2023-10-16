@@ -48,7 +48,7 @@ namespace AuthorizationOperation.Application.UserCases.Login.Commands
 
             var claims = new ClaimDto
             {
-                Guid = userExists.Guid.ToString(),
+                Guid = userExists.UUID.ToString(),
                 UserName = userExists.UserName,
                 FirstName = string.Empty, // TODO: add userExists.FirstName;
                 LastName = string.Empty, // TODO: add userExists.LastName;

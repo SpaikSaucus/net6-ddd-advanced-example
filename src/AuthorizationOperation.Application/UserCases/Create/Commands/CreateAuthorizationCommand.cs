@@ -37,13 +37,14 @@ namespace AuthorizationOperation.Application.UserCases.Create.Commands
             if (authorizationExists != null) 
             {
                 this.logger.LogInformation(messageExistsAuthorization, authorizationExists.UUID, authorizationExists.Status, authorizationExists.Created);
-                return authorizationExists;
+                throw new Exception(string.Format(messageExistsAuthorization, authorizationExists.UUID, authorizationExists.Status, authorizationExists.Created));
             }
 
             var authorization = new Authorization()
             {
                 UUID = cmd.UUID,
                 Customer = cmd.Customer,
+                StatusId = AuthorizationStatusEnum.WAITING_FOR_SIGNERS,
                 Created = DateTime.UtcNow
             };
 

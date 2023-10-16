@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthorizationOperation.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(AuthorizationDbContext))]
-    [Migration("20231004165722_CreateUserTableForLogin")]
-    partial class CreateUserTableForLogin
+    [Migration("20231016184132_AuthorizationAddUUID")]
+    partial class AuthorizationAddUUID
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,88 +25,103 @@ namespace AuthorizationOperation.Infrastructure.EF.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created");
 
                     b.Property<string>("Customer")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("customer");
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
+                    b.Property<ushort>("StatusId")
+                        .HasColumnType("smallint unsigned")
+                        .HasColumnName("status_id");
 
                     b.Property<string>("UUID")
                         .IsRequired()
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("varchar(36)")
+                        .HasColumnName("uuid");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_authorization_id");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("StatusId")
+                        .HasDatabaseName("ix_authorization_status_id");
 
-                    b.ToTable("Authorizations");
+                    b.ToTable("authorization", (string)null);
                 });
 
             modelBuilder.Entity("AuthorizationOperation.Domain.Authorization.Models.AuthorizationStatus", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<ushort>("Id")
+                        .HasColumnType("smallint unsigned")
+                        .HasColumnName("id");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_authorization_status_id");
 
                     b.ToTable("authorization_status", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 0,
+                            Id = (ushort)1,
                             Name = "WAITING_FOR_SIGNERS"
                         },
                         new
                         {
-                            Id = 1,
+                            Id = (ushort)2,
                             Name = "AUTHORIZED"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = (ushort)3,
                             Name = "EXPIRED"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = (ushort)4,
                             Name = "CANCELLED"
                         });
                 });
 
             modelBuilder.Entity("AuthorizationOperation.Domain.User.Models.User", b =>
                 {
-                    b.Property<Guid>("Guid")
+                    b.Property<Guid>("UUID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("char(36)")
+                        .HasColumnName("uuid");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("created");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("email");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("password");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("username");
+                        .HasColumnName("user_name");
 
-                    b.HasKey("Guid");
+                    b.HasKey("UUID")
+                        .HasName("pk_user_uuid");
 
                     b.ToTable("user", (string)null);
                 });
@@ -117,7 +132,8 @@ namespace AuthorizationOperation.Infrastructure.EF.Migrations
                         .WithMany()
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_authorization_authorization_status_status_id");
 
                     b.Navigation("Status");
                 });

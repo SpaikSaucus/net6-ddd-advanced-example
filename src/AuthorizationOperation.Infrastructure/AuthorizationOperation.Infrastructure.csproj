@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EF\Migrations\" />
     <Folder Include="Resources\" />
     <Folder Include="Shared\" />
   </ItemGroup>

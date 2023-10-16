@@ -11,13 +11,13 @@ namespace AuthorizationOperation.Infrastructure.EF.Config
         {
             builder.ToTable("user");
 
-            builder.Property(e => e.Guid).HasConversion<Guid>().IsRequired();
-            builder.Property(e => e.UserName).HasColumnName("username").IsRequired();
-            builder.Property(e => e.Password).IsRequired();
-            builder.Property(e => e.Email).IsRequired();
-            builder.Property(e => e.Created).IsRequired();
+            builder.Property(e => e.UUID).HasColumnName("uuid").HasConversion<Guid>().IsRequired();
+            builder.Property(e => e.UserName).HasColumnName("user_name").IsRequired();
+            builder.Property(e => e.Password).HasColumnName("password").IsRequired();
+            builder.Property(e => e.Email).HasColumnName("email").IsRequired();
+            builder.Property(e => e.Created).HasColumnName("created").IsRequired();
 
-            builder.HasKey("Guid");
+            builder.HasKey(e => e.UUID).HasName("pk_user_uuid");
         }
     }
 }
