@@ -29,7 +29,8 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Security
                 new Claim(UserClaimTypes.Email, userInformation.Email)
             };
 
-            var secretKey = this.Configuration["AppSettings:SymmetricKey"]; //TODO: you can't have secrets in your Code (in this case, in the AppSettings)
+#warning You cannot have secrets in your Code, for educational purposes, we will configure the secret in the appSettings.
+            var secretKey = this.Configuration["AppSettings:SymmetricKey"]; 
             var key = Encoding.ASCII.GetBytes(secretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
