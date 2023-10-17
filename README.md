@@ -1,15 +1,16 @@
-[![en](https://img.shields.io/badge/lang-en-red.svg):ballot_box_with_check:]() [![es](https://img.shields.io/badge/lang-es-yellow.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.es.md)
+![en](https://img.shields.io/badge/lang-en-red.svg):ballot_box_with_check: [![es](https://img.shields.io/badge/lang-es-yellow.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.es.md)
 
 # net6-ddd-advanced-example
 NET 6 example with DDD Architecture and some advanced features.
 
 ## Table of Contents
 - [Getting started](#getting-started)
-- [Features List](#features-list)
-- [Folder Structure](#folder-structure)
+- [Features list](#features-list)
+- [Folder structure](#folder-structure)
   - [1- Entrypoint](#1--entrypoint)
   - [2- Core](#2--core)
   - [3- Infrastructure](#3--infrastructure)
+- [Read recommended](#read-recommended)
 - [License](#license)
 
 ## Getting Started
@@ -154,7 +155,24 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 
 ## Health Check
 ---
-  * https://localhost:5001/health
+Health checks are exposed by an app as HTTP endpoints, are typically used with an external monitoring service or container orchestrator to check the status of an app. 
+
+Before adding health checks to an app, decide on which monitoring system to use. The monitoring system dictates what types of health checks to create and how to configure their endpoints.
+
+Use the library:
+   * Microsoft.AspNetCore.Diagnostics.HealthChecks
+
+The configuration can be found in:
+   * __Infrastructure.Bootstrap__ :arrow_right: Extensions
+     * ApplicationBuilder :arrow_right: HealthChecksApplicationBuilderExtensions
+     and in:
+     * ServiceCollections :arrow_right: HealthChecksServiceCollectionExtensions
+    
+And we can call the __"/health"__ endpoint to check its operation.
+   * https://localhost:5001/health
+
+References:
+  * [Learn Microsoft Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
 ## Logs
 ---

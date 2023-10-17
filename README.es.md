@@ -1,4 +1,4 @@
-[![en](https://img.shields.io/badge/lang-en-red.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.md) [![es](https://img.shields.io/badge/lang-es-yellow.svg):ballot_box_with_check:]()
+[![en](https://img.shields.io/badge/lang-en-red.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.md) ![es](https://img.shields.io/badge/lang-es-yellow.svg):ballot_box_with_check:
 
 # net6-ddd-advanced-example
 Ejemplo NET 6 con arquitectura DDD y algunas funciones avanzadas.
@@ -6,10 +6,11 @@ Ejemplo NET 6 con arquitectura DDD y algunas funciones avanzadas.
 ## Table of Contents
 - [Iniciando](#iniciando)
 - [Lista de características](#lista-de-caracter%C3%ADsticas)
-- [Estructura de Carpetas](#folder-structure)
+- [Estructura de carpetas](#folder-structure)
   - [1- Entrypoint](#1--entrypoint)
   - [2- Core](#2--core)
   - [3- Infrastructure](#3--infrastructure)
+- [Lectura recomendada](#lectura-recomendada)
 - [Licencia](#licencia)
 
 ## Iniciando
@@ -155,7 +156,24 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 
 ## Health Check
 ---
+Una aplicación se encarga de exponer las comprobaciones de estado como puntos de conexión HTTP, donde normalmente, las comprobaciones de estado se usan con un servicio de supervisión externa o un orquestador de contenedores para comprobar el estado de una aplicación. 
+
+Antes de agregar comprobaciones de estado a una aplicación, debe decidir en qué sistema de supervisión se va a usar. El sistema de supervisión determina qué tipos de comprobaciones de estado se deben crear y cómo configurar sus puntos de conexión.
+
+Para ello utilizamos la biblioteca:
+  * Microsoft.AspNetCore.Diagnostics.HealthChecks
+
+Dicha configuración se puede encontrar en:
+  * __Infrastructure.Bootstrap__ :arrow_right: Extensions   
+    * ApplicationBuilder :arrow_right: HealthChecksApplicationBuilderExtensions    
+    y en:
+    * ServiceCollections :arrow_right: HealthChecksServiceCollectionExtensions
+    
+Y podemos ingresar al endpoint __"/health"__ para comprobar su funcionamiento.
   * https://localhost:5001/health
+
+Referencias:
+  * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
 ## Logs
 ---
