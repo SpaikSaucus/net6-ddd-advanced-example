@@ -1,15 +1,16 @@
-![en](https://img.shields.io/badge/lang-en-red.svg):ballot_box_with_check: [![es](https://img.shields.io/badge/lang-es-yellow.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.es.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg):ballot_box_with_check:](#) [![es](https://img.shields.io/badge/lang-es-yellow.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.es.md)
 
 # net6-ddd-advanced-example
 NET 6 example with DDD Architecture and some advanced features.
 
 ## Table of Contents
+
 - [Getting started](#getting-started)
-- [Features list](#features-list)
 - [Folder structure](#folder-structure)
   - [1- Entrypoint](#1--entrypoint)
   - [2- Core](#2--core)
   - [3- Infrastructure](#3--infrastructure)
+- [Features list](#features-list)
 - [Read recommended](#read-recommended)
 - [License](#license)
 
@@ -39,24 +40,8 @@ Install and select these features:
   
 * play and enjoy!
 
-## Features List
-- [Architecture DDD (Domain Driven Design)](#architecture-ddd)
-- [Api Versions](#api-versions)
-- [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
-- [Oas3 (OpenAPI Specification - Version 3)](#oas3)
-- [Swagger](#swagger)
-- [MediatR](#mediatr)
-- [Health Check](#health-check)
-- [Logs](#logs)
-- [EF (Entity Framework)](#ef-mysql)
-- [Unit of Work Pattern](#unit-of-work)
-- [CQRS Pattern (Command and Query Responsibility Segregation)](#cqrs-pattern)
-- [Query Specification Pattern](#query-specification-pattern)
-- [Multiple Environments File](#multiple-environments)
-- [Unit Test](#unit-test)
-- [Integrations Test](#integration-test)
-
 ## Folder structure
+
 In this section, we will explain the structure of the project, how the layers are designed, and what function each one fulfills. We will also mention some important folders.
 
 ### 1- ENTRYPOINT
@@ -106,18 +91,77 @@ Here we will find specific implementations for data access, ORMs, MicroORMS, HTT
       * __AutofacModules__: contains the modules that we define, which will be used to register the components that can be created with reflection. In this way, we can use the services that we generate in the _Infrastructure_ layer in the _Application_ layer. The use of these services in the _Domain_ layer is discouraged because it must be as isolated as possible.
       * __Extensions__: contains the configurations necessary for launching our application in a segregated way to improve its understanding and discovery, among other things.
 
+## Features List
+
+- [Architecture DDD (Domain Driven Design)](#architecture-ddd)
+- [Api Versions](#api-versions)
+- [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
+- [Oas3 (OpenAPI Specification - Version 3)](#oas3)
+- [Swagger](#swagger)
+- [MediatR](#mediatr)
+- [Health Check](#health-check)
+- [Logs](#logs)
+- [EF (Entity Framework) Code First](#ef-code-first-mysql)
+- [Unit of Work Pattern](#unit-of-work)
+- [CQRS Pattern (Command and Query Responsibility Segregation)](#cqrs-pattern)
+- [Query Specification Pattern](#query-specification-pattern)
+- [Multiple Environments File](#multiple-environments)
+- [Unit Test](#unit-test)
+- [Integrations Test](#integration-test)
+
 ## Architecture DDD
-When we work with DDD there are three parts that we must take into account:
-   * Separation of responsibilities into layers, isolate the domain
-   * Model and define the model.
-   * Manage the life cycle of Domain objects.
+The main objective of applying Domain Driven Design is to be able to isolate the code that belongs to the domain from the technical implementation details and thus focus on the complexity of the business.
+
+##### Core Principles
+We could say that domain orientation focuses on three basic pillars:
+  * Focus on the core domain and business logic.
+  * Convert complex designs into domain models.
+  * Constant interaction and collaboration with domain experts, which will help resolve doubts and interact more with the development team.
+
+In turn, when we work with DDD we must take into account:
+  * Separation of responsibilities into layers, _(isolate the domain)_.
+  * Model and define the model.
+  * Manage the life cycle of Domain objects.
+
+##### The different layers:
+
+* __Domain layer:__
+  Responsible for representing business concepts, information about the business situation and business rules. The state that reflects the business situation is controlled and used here, although the technical details of its storage are delegated to the infrastructure. This level is the core of enterprise software, where the business is expressed, in. NET, _is coded as a class library_, with domain entities that capture data and behavior (methods with logic).
+  <br/>In turn, this library only has dependencies on .NET libraries, but not on other custom libraries, such as data or persistence. It should not depend on any other level (domain model classes must be CLR or POCO object classes).
+  <br/>
+
+* __Application layer:__
+  It defines the jobs that the software is supposed to do and directs domain objects to solve problems. The tasks that are the responsibility of this level are significant to the business or necessary for interaction with the application levels of other systems.
+  <br/>This level should be kept narrow. It does not contain business rules or knowledge, but only coordinates tasks and delegates work to domain object collaborations at the next level. It does not have any status that reflects the business situation, but it can have a status that reflects the progress of a task for the user or the program.
+  <br/>Typically, the application layer in .NET microservices is coded as an ASP.NET Core Web API project. The project implements microservice interaction, remote network access, and external web APIs used by client or front-end applications. It includes queries if using a CQRS approach, commands accepted by the microservice, and even event-driven communication between microservices (integration events).
+  <br/>Basically, application logic is where all use cases that depend on a given front end are implemented.
+
+  <br/>In this "_Authorization.Operation_" example, this layer is split to improve the design focus, resulting in the following two projects:
+  * 1- ENTRYPOINT :arrow_right: __API__
+  * 2- CORE :arrow_right: __Application__
+  <br/>
+
+* __Infrastructure layer:__
+  It is where the technical part of the application resides, with its specific implementations and where dependencies on third-party software will be added to comply with integrations, database, file management, etc.
+
+  <br/>In this "_Authorization.Operation_" example, this layer is split to improve the design focus, resulting in the following two projects:
+  * 3- INFRASTRUCTURE :arrow_right: __Infrastructure__
+  * 3- INFRASTRUCTURE :arrow_right: __Infrastructure.Bootstrap__
+  <br/>
+
+![ddd_1_en](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_1_en.png?raw=true)
+![ddd_2_en](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_2_en.png?raw=true)
+
+References:
+  * [Learn Microsoft DDD](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
+  * [Introduction DDD (spanish)](https://refactorizando.com/introduccion-domain-drive-design/)
 
 ## Api Versions
----
+
 API Versioning package allows us to flag APIs as deprecated. So this gives time to the client to prepare changes. Otherwise immediately deleting older APIs could give a bad taste to clients.
 
 ## JWT bearer authentication
----
+
 1. Create Token:
 ```bash
 curl --location 'https://localhost:5001/api/v2/login' \
@@ -142,19 +186,23 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 * You use the attribute [Authorize] in the endpoint or entire controller to indicate that should use JWT Token.
 
 ## Oas3
----
-* https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
+
+
+References:
+  * [Learn Microsoft Swashbuckle](https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
 
 ## Swagger
----
+
   * https://localhost:5001/swagger
 
 ## MediatR
----
-* https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr
+
+
+References:
+  * [CQRS web-api command process pipeline with a mediator pattern MediatR](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr)
 
 ## Health Check
----
+
 Health checks are exposed by an app as HTTP endpoints, are typically used with an external monitoring service or container orchestrator to check the status of an app. 
 
 Before adding health checks to an app, decide on which monitoring system to use. The monitoring system dictates what types of health checks to create and how to configure their endpoints.
@@ -175,22 +223,25 @@ References:
   * [Learn Microsoft Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
 ## Logs
----
-* https://serilog.net/
-* https://stackify.com/serilog-tutorial-net-logging/	
-	
-## EF (MySQL)
----
-* https://dev.mysql.com/downloads/installer/
-* https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core
-* https://www.entityframeworktutorial.net/efcore/install-entity-framework-core.aspx
-* https://learn.microsoft.com/en-us/ef/core/
-* https://learn.microsoft.com/en-us/ef/core/cli/dotnet
-* https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md
-* https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
+
+
+References:
+  * [Serilog Web](https://serilog.net/)
+  * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
+    
+## EF Code First (MySQL)
+
+
+References:
+  * [Learn Microsoft EF Core](https://learn.microsoft.com/en-us/ef/core/)
+  * [Learn Microsoft EF Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+  * [Learn Microsoft EF Core DBContext](https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/)
+  * [Learn Microsoft EF Core Implementation](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core)
+  * [EF Core Tutorial 1](https://www.entityframeworktutorial.net/efcore/install-entity-framework-core.aspx)
+  * [EF Core Tutorial 2](https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md)
 
 ## Unit Of Work
----
+
 It is a pattern that has the purpose of ensuring that the same database context is shared so that when the tasks to be performed in the database are completed, the SaveChanges method can be called on that instance of the context and ensure that all related changes will be coordinated.
 
 Example:
@@ -218,7 +269,7 @@ References:
   * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 
 ## CQRS Pattern
----
+
 It is a pattern that seeks to have two separate objects, one for reading operations and another for writing operations, unlike other approaches that seek to have everything in one.
 
   * Queries: These queries return a result and don't change the state of the system, and they're free of side effects.
@@ -231,7 +282,7 @@ References:
   * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
 ## Query Specification Pattern
----
+
 It is a pattern that seeks to comply with DDD for data queries so that these specifications are stored in the __Domain__ layer, effectively separating the logic that exists in the queries from their implementation.
 
 To do this, the base class _BaseSpecification_ and the interface _ISpecification_ were generated in the __Domain__ layer. In the __Infrastructure__ layer there is the _SpecificationEvaluator_ class that is used by the _Repository_ class to apply the specification to be used.
@@ -269,7 +320,7 @@ Referencias:
   * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
 ## Multiple Environments
----
+
 Create the json with this naming:
   * appsettings.__environment__.json
 
@@ -283,7 +334,7 @@ References:
   * [Learn Microsoft Environments](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
 ## Unit Test
----
+
 xUnit: These tests are written using XUnit and using the following FluentAssertions and FakeItEasy libraries.
 
 References:
@@ -293,13 +344,14 @@ References:
   * [Learn Microsoft Unit Testing (best practices)](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices)
 
 ## Integration Test
----
+
 Microsoft.AspNetCore.TestHost - These Tests help us perform an integration test of our APP. The objective of this is to be able to build the Net Core middleware with all the configurations.
 
 References:
   * [Learn Microsoft Integration Tests](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
 
 ## Read Recommended:
+
   * [Learn Microsoft DDD with CQRS](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
 
 ## License
