@@ -102,6 +102,10 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 
   * #### INFRASTRUCTURE.BOOSTRAP
 
+    * __AutofacModules__: contiene los módulos que nosotros definamos, los cuales se utilizaran para registrar los componentes que se podrán crear con reflection. De esta forma, podremos utilizar los servicios que generemos en la capa _Infrastructure_ en la capa _Application_. Se desaconseja el uso de dichos servicios en la capa _Domain_ debido a que la misma debe estar los mas aislada posible.
+    * __Extensions__: contiene las configuraciones necesarias para la iniciación de nuestra aplicación de forma segregada para mejorar su comprensión y descubrimiento, entre otras cosas.
+
+
 ## Architecture DDD
 Cuando trabajamos con DDD hay tres partes que debemos tener en cuenta:
   * Separación de responsabilidades en capas, aislar el dominio
@@ -170,20 +174,88 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 
 ## Unit Of Work
 ---
-* https://martinfowler.com/eaaCatalog/unitOfWork.html
+Es un patron que tiene como propósito asegurarse de que se comparta un mismo contexto de base de datos, de modo que cuando se completan las tareas a realizar en la base de datos, se pueda llamar al SaveChanges, método en esa instancia del contexto y asegurarse de que todos los cambios relacionados se coordinarán. 
+
+Ejemplo:
+
+```csharp
+var authorization = new Authorization()
+{
+    UUID = cmd.UUID,
+    Customer = cmd.Customer,
+    StatusId = AuthorizationStatusEnum.WAITING_FOR_SIGNERS,
+    Created = DateTime.UtcNow
+};
+
+this.unitOfWork.Repository<Authorization>().Add(authorization);
+// ...
+// this.unitOfWork.Repository<....>().Add(...);
+// this.unitOfWork.Repository<....>().Remove(...);
+// this.unitOfWork.Repository<....>().Update(...);
+// ...
+await this.unitOfWork.Complete();
+```
+
+Referencias:
+  * [Aprendiendo Microsoft Unit Of Work Pattern](https://learn.microsoft.com/es-es/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
+  * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 
 ## CQRS Pattern
 ---
-* https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns
+Es un patron que busca tener dos objetos separados, uno para operaciones de lectura y otro para operaciones de escritura, a diferencia de otros enfoques que buscan tener todo en uno solo.
+
+  * Consultas: Estas consultas devuelven un resultado sin cambiar el estado del sistema y no tienen efectos secundarios.
+    * __Application__ :arrow_right: UserCases :arrow_right: FindOne :arrow_right: Queries
+    <br/>  
+  * Comandos: Estos comandos cambian el estado de un sistema.
+    * __Application__ :arrow_right: UserCases :arrow_right: Create :arrow_right: Commands
+
+Referencias:
+  * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
 ## Query Specification Pattern
 ---
-* https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa
+Es un patron que busca cumplir con DDD para la consulta de datos de manera que dichas especificaciones se almacenen en la capa __Domain__, separando de manera efectiva la lógica que existe en las consultas de su implementación.
+
+Para ello se genero en la capa __Domain__ la clase base _BaseSpecification_ y la interface _ISpecification_. En la capa __Infrastructure__ existe la clase _SpecificationEvaluator_ que es utilizada por la clase _Repository_ para aplicar la especificación a utilizar.
+
+Ejemplo:
+La clase _AuthorizationGetSpecification_ que se encuentra en la carpeta
+  * __Domain__ :arrow_right: Authorization :arrow_right: Queries
+
+```csharp
+public class AuthorizationGetSpecification : BaseSpecification<Models.Authorization>
+{
+  public AuthorizationGetSpecification(uint id = default, Guid uuid = default)
+  {
+    base.AddInclude(x => x.Status);
+    Expression<Func<Models.Authorization, bool>> criteria = null;
+
+    if (id != default)
+      criteria = this.OrCriteria(criteria, x => x.Id == id);
+    if (uuid != default)
+      criteria = this.OrCriteria(criteria, x => x.UUID == uuid);
+    base.SetCriteria(criteria);
+  }
+}
+```
+Dicha especificación es utilizada en la clase _AuthorizationGetQuery_ que se encuentra en la carpeta
+  * __Application__ :arrow_right: UserCases :arrow_right: FindOne :arrow_right: Queries
+
+```csharp
+var spec = new AuthorizationGetSpecification(request.Id);
+var result = this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefault();
+return Task.FromResult(result);
+```
+
+Referencias: 
+  * [Aprendiendo Microsoft Query Specification Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core#implement-the-query-specification-pattern)
+  * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
 ## Multiple Environments
 ---
 Crear el json con el siguiente nombre:
-*  appsettings.__environment__.json
+  * appsettings.__environment__.json
 
 Ejemplos:
 
@@ -191,27 +263,28 @@ Ejemplos:
 
 ![img_hierarchy_2](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/multiple_environments_2.png?raw=true)	
 
-* References
-  * https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0
+Referencias:
+  * [Aprendiendo Microsoft Environments](https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
 ## Unit Test
 ---
-Dichos test están escritos mediante XUnit y utilizando las siguientes bibliotecas FluentAssertions y FakeItEasy.
+xUnit: Estos test están escritos mediante XUnit y utilizando las siguientes bibliotecas FluentAssertions y FakeItEasy.
 
-Reference:
-* https://fluentassertions.com/
-* https://fakeiteasy.readthedocs.io/en/stable/
-* https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/
-* https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices
+Referencias:
+  * [Fluent Assertions Web](https://fluentassertions.com/)
+  * [Fake It Easy Web](https://fakeiteasy.readthedocs.io/en/stable/)
+  * [Blog NUnit vs xUnit vs MSTest](https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/)
+  * [Aprendiendo Microsoft Unit Testing (mejores practicas)](https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices)
 
 ## Integration Test
 ---
 Microsoft.AspNetCore.TestHost - Estos Test nos ayudan a poder realizar una prueba de integración de nuestra APP. El objetivo del mismo es poder levantar el middleware de Net Core con todas las configuraciones.
 
-* https://learn.microsoft.com/es-es/aspnet/core/test/integration-tests?view=aspnetcore-6.0
+Referencias:
+  * [Aprendiendo Microsoft Integration Tests](https://learn.microsoft.com/es-es/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
 
 ## Lectura recomendada:
-* [Learn DDD Oriented Microservice](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
+  * [Aprendiendo Microsoft DDD con CRQS](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
 
 ## Licencia
 
