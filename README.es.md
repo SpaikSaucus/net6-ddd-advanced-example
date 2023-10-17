@@ -1,4 +1,4 @@
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.md)[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.es.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg):black_large_square:](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/README.md) [![es](https://img.shields.io/badge/lang-es-yellow.svg):ballot_box_with_check:]()
 
 # net6-ddd-advanced-example
 Ejemplo NET 6 con arquitectura DDD y algunas funciones avanzadas.
@@ -34,26 +34,26 @@ Instalar y seleccionar estas características:
     * (reemplazar las credenciales)
 
 * Postman:
-  * Examples [click here](https://github.com/SpaikSaucus/net46-ddd-advanced-example/blob/main/postman)
+  * Examples [click here](https://github.com/SpaikSaucus/net46-ddd-advanced-example/blob/main/postman/Net6Advance.postman_collection.json)
   
 * dale play y disfruta!
 
 ## Lista de características
-[Architecture DDD (Domain Driven Design)](#architecture-ddd)
-[Api Versions](#api-versions)
-[JWT (JSON Web Tokens)](#jwt-bearer-authentication)
-[Oas3 (OpenAPI Specification - Version 3)](#oas3)
-[Swagger](#swagger)
-[MediatR](#mediatr)
-[Health Check](#health-check)
-[Logs](#logs)
-[EF (Entity Framework)](#ef-mysql)
-[Unit of Work Pattern](#unit-of-work)
-[CQRS Pattern (Command and Query Responsibility Segregation)](#cqrs-pattern)
-[Query Specification Pattern](#query-specification-pattern)
-[Multiple Environments File](#multiple-environments)
-[Unit Test](#unit-test)
-[Integrations Test](#integration-test)
+- [Architecture DDD (Domain Driven Design)](#architecture-ddd)
+- [Api Versions](#api-versions)
+- [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
+- [Oas3 (OpenAPI Specification - Version 3)](#oas3)
+- [Swagger](#swagger)
+- [MediatR](#mediatr)
+- [Health Check](#health-check)
+- [Logs](#logs)
+- [EF (Entity Framework)](#ef-mysql)
+- [Unit of Work Pattern](#unit-of-work)
+- [CQRS Pattern (Command and Query Responsibility Segregation)](#cqrs-pattern)
+- [Query Specification Pattern](#query-specification-pattern)
+- [Multiple Environments File](#multiple-environments)
+- [Unit Test](#unit-test)
+- [Integrations Test](#integration-test)
 
 ## Estructura de carpetas
 En este apartado explicaremos la estructura del proyecto, como están diseñadas las capas, que función cumple cada una. También haremos mención sobre algunas carpetas importantes.
