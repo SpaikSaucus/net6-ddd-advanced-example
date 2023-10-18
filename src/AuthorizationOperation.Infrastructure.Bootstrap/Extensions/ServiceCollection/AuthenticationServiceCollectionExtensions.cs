@@ -1,11 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceCollection
 {
-    using System.Text;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.IdentityModel.Tokens;
-
     public static class AuthenticationServiceCollectionExtensions
     {
         public static void AddAuthenticationExtension(this IServiceCollection services, IConfiguration configuration)
