@@ -96,8 +96,7 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 - [Arquitectura DDD (Domain Driven Design)](#arquitectura-ddd)
 - [Api Versions](#api-versions)
 - [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
-- [Oas3 (OpenAPI Specification - Version 3)](#oas3)
-- [Swagger](#swagger)
+- [Swagger Oas3 (OpenAPI Specification - Version 3)](#swagger-oas3)
 - [MediatR](#mediatr)
 - [Health Check](#health-check)
 - [Logs](#logs)
@@ -178,6 +177,11 @@ Si queremos visualizar la configuración de ApiVersioning, debemos ingresar a la
 
   * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions    
 
+
+
+https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/
+
+
 ## JWT bearer authentication
 
 1. Crear el token:
@@ -203,16 +207,44 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 * El token se encuentra configurado en 1 dia de expiración. En la clase JwtProvider > SecurityTokenDescriptor > Expires, usted puede cambiar la duración de la expiración asociada al token.
 * Use el atributo [Authorize] en el endpoint o en todo el controller para indicar que deberá usarse el JWT Token.
 
-## Oas3
+## Swagger Oas3
 
+Es una herramienta basada en el estándar OpenAPI que nos permite documentar y probar nuestras Web APIs, para que sean fácilmente accesibles y entendibles por los usuarios o desarrolladores que pretendan utilizarlas.
+
+Mediante el tag __summary__ podremos agregar información en el controller y en las clases que se utilizan como request/response, para ser visualizada en la documentación generada, ejemplo:
+
+```csharp
+public class AuthorizationPageResponse
+{
+    /// <summary>
+    /// Total result.
+    /// </summary>
+    /// <example>10</example>
+    public int Total { get; set; }
+
+    /// <summary>
+    /// Page result (0..N).
+    /// </summary>
+    /// <example>0</example>
+    public uint Offset { get; set; }
+```
+
+Para acceder a la documentación generada por esta herramienta, deberemos ingresar al siguiente endpoint:
+* https://localhost:5001/swagger
+
+![swagger_oas3_1](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/swagger_oas3_1.png?raw=true)
+
+Si queremos visualizar la configuración, debemos ingresar a la siguientes clases: 
+
+  * __Infrastructure.Bootstrap__ :arrow_right: Extensions   
+    * ApplicationBuilder :arrow_right: SwaggerApplicationBuilderExtensions    
+    y en:
+    * ServiceCollections :arrow_right: SwaggerServiceCollectionExtensions
 
 Referencias:
   * [Aprendiendo Microsoft Swashbuckle](https://learn.microsoft.com/es-es/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
-
-## Swagger
-
-  * https://localhost:5001/swagger
-
+  * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
+  
 ## MediatR
 
 
