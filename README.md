@@ -36,7 +36,7 @@ Install and select these features:
     * (replace credentials)
 
 * Postman:
-  * Examples [click here](https://github.com/SpaikSaucus/net46-ddd-advanced-example/blob/main/postman/Net6Advance.postman_collection.json)
+  * Examples [click here](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/postman/Net6Advance.postman_collection.json)
   
 * play and enjoy!
 
@@ -112,7 +112,7 @@ Here we will find specific implementations for data access, ORMs, MicroORMS, HTT
 ## Architecture DDD
 The main objective of applying Domain Driven Design is to be able to isolate the code that belongs to the domain from the technical implementation details and thus focus on the complexity of the business.
 
-##### Core Principles
+### Core Principles
 We could say that domain orientation focuses on three basic pillars:
   * Focus on the core domain and business logic.
   * Convert complex designs into domain models.
@@ -123,7 +123,7 @@ In turn, when we work with DDD we must take into account:
   * Model and define the model.
   * Manage the life cycle of Domain objects.
 
-##### The different layers:
+### The different layers:
 
 * __Domain layer:__
   Responsible for representing business concepts, information about the business situation and business rules. The state that reflects the business situation is controlled and used here, although the technical details of its storage are delegated to the infrastructure. This level is the core of enterprise software, where the business is expressed, in. NET, _is coded as a class library_, with domain entities that capture data and behavior (methods with logic).
@@ -159,6 +159,22 @@ References:
 ## Api Versions
 
 API Versioning package allows us to flag APIs as deprecated. So this gives time to the client to prepare changes. Otherwise immediately deleting older APIs could give a bad taste to clients.
+
+To define a version as obsolete, you only need to include the __Deprecated__ in its construction, in the indicated _Controller_, example:
+
+```csharp
+[ApiVersion("1.0", Deprecated = true)]
+```
+
+To select the current version in which our API is located, we will have to update the environment file:
+```json
+"AppSettings": {
+     "DefaultApiVersion": "2.0",
+```
+
+If we want to view the ApiVersioning configuration, we must enter the following class:
+
+  * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions
 
 ## JWT bearer authentication
 

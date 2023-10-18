@@ -36,7 +36,7 @@ Instalar y seleccionar estas características:
     * (reemplazar las credenciales)
 
 * Postman:
-  * Examples [click here](https://github.com/SpaikSaucus/net46-ddd-advanced-example/blob/main/postman/Net6Advance.postman_collection.json)
+  * Examples [click here](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/postman/Net6Advance.postman_collection.json)
   
 * dale play y disfruta!
 
@@ -113,7 +113,7 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 
 El objetivo principal de aplicar DDD o Domain Driven Design en inglés, es poder aislar el código que pertenece al dominio de los detalles técnicos de implementación y así centrarnos en la complejidad del negocio.
 
-##### Principios centrales
+### Principios centrales
 Podríamos decir que la orientación al dominio se centra en tres pilares básicos:
   * Focalizar en el dominio central y la lógica de negocio.
   * Convertir diseños complejos en modelos de dominio.
@@ -125,7 +125,7 @@ A su vez, cuando trabajamos con DDD debemos tener en cuenta:
   * Gestionar el ciclo de vida de los objetos de Dominio.
 
 
-##### Las diferentes capas son:
+### Las diferentes capas son:
 
 * __Capa de dominio:__ 
   Responsable de representar conceptos del negocio, información sobre la situación del negocio y reglas de negocios. El estado que refleja la situación empresarial está controlado y se usa aquí, aunque los detalles técnicos de su almacenaje se delegan a la infraestructura. Este nivel es el núcleo del software empresarial, donde se expresa el negocio, en. NET, _se codifica como una biblioteca de clases_, con las entidades de dominio que capturan datos y comportamiento (métodos con lógica).
@@ -142,7 +142,7 @@ A su vez, cuando trabajamos con DDD debemos tener en cuenta:
   * 1- ENTRYPOINT :arrow_right: __API__
   * 2- CORE  :arrow_right: __Application__
 	<br/>
-  
+
 * __Capa de infraestructura:__
   Es en donde reside la parte técnica de la aplicación, con sus implementaciones concretas y donde se añadirán las dependencias a software de terceros para cumplir con integraciones, base de datos, manejo de archivos, etc.
 
@@ -161,6 +161,22 @@ Referencias:
 ## Api Versions
 
 El paquete API Versioning nos permite marcar las API como obsoletas. Entonces esto le da tiempo al cliente para preparar los cambios. De lo contrario, eliminar inmediatamente las API más antiguas podría generar problemas a los clientes.
+
+Para definir una version como obsoleta, solo hace falta incluir el __Deprecated__ en su construcción, en el _Controller_ indicado, ejemplo:
+
+```csharp
+[ApiVersion("1.0", Deprecated = true)]
+```
+
+Y para seleccionar la version actual en la que se encuentra nuestra API, deberemos actualizar el archivo de environment:
+```json
+"AppSettings": {
+    "DefaultApiVersion": "2.0",
+```
+
+Si queremos visualizar la configuración de ApiVersioning, debemos ingresar a la siguiente clase: 
+
+  * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions    
 
 ## JWT bearer authentication
 
