@@ -1,10 +1,10 @@
-using System;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Net.Http.Headers;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ServiceCollection
 {

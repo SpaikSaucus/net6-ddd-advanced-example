@@ -1,9 +1,10 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.ApplicationBuilder
 {
@@ -19,7 +20,7 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.Application
             app.UseSwaggerUI(c =>
             {         
                 //Build a swagger endpoint for each discovered API version
-                foreach (var description in provider.ApiVersionDescriptions)
+                foreach (var description in provider.ApiVersionDescriptions.Reverse())
                     c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
 
                 c.SupportedSubmitMethods(SubmitMethod.Head, SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete);
@@ -30,7 +31,7 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Extensions.Application
                 c.DocExpansion(DocExpansion.None);
                 c.EnableDeepLinking();
                 c.EnableFilter();
-                c.RoutePrefix = string.Empty;
+                c.RoutePrefix = "swagger";
             });
 
         }
