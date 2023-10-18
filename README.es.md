@@ -97,12 +97,11 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 - [Api Versions](#api-versions)
 - [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
 - [Swagger Oas3 (OpenAPI Specification - Version 3)](#swagger-oas3)
-- [MediatR](#mediatr)
+- [MediatR + CQRS](#mediatr--cqrs)
 - [Health Check](#health-check)
 - [Logs](#logs)
 - [EF (Entity Framework) Code First](#ef-code-first-mysql)
 - [Unit of Work Pattern](#unit-of-work)
-- [CQRS Pattern (Command and Query Responsibility Segregation)](#cqrs-pattern)
 - [Query Specification Pattern](#query-specification-pattern)
 - [Multiple Environments File](#multiple-environments)
 - [Unit Test](#unit-test)
@@ -177,9 +176,8 @@ Si queremos visualizar la configuración de ApiVersioning, debemos ingresar a la
 
   * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions    
 
-
-
-https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/
+Referencias:
+  * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
 
 
 ## JWT bearer authentication
@@ -203,7 +201,7 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 }'
 ```
 
-* Usted puede chequear la información del token en https://jwt.io/
+* Usted puede chequear la información del token en [JWT.io](https://jwt.io/)
 * El token se encuentra configurado en 1 dia de expiración. En la clase JwtProvider > SecurityTokenDescriptor > Expires, usted puede cambiar la duración de la expiración asociada al token.
 * Use el atributo [Authorize] en el endpoint o en todo el controller para indicar que deberá usarse el JWT Token.
 
@@ -245,11 +243,29 @@ Referencias:
   * [Aprendiendo Microsoft Swashbuckle](https://learn.microsoft.com/es-es/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
   
-## MediatR
+## MediatR + CQRS
 
+### MediatR
+Es una biblioteca de código abierto, pequeña y simple, que implementa el patrón de mediador, para la canalización de mensajes (comandos) y enrutandolos, en memoria, a los controladores de comandos correctos.
+
+El uso del patrón de mediador ayuda a reducir el acoplamiento y aislar el procesamiento del comando solicitado, del resto del código.
+
+### CQRS
+CQRS en ingles significa (Command Query Responsibility Segregation), el cual es un patron que busca tener dos objetos separados, uno para operaciones de lectura y otro para operaciones de escritura, a diferencia de otros enfoques que buscan tener todo en uno solo.
+
+### Combinándolos
+En este ejemplo "_Authorization.Operation_", combinamos el patron mediador con el patron CQRS, el resultado implica la creación de comandos para consultas y comandos para cambiar el estado del sistema.
+
+  * Consultas: Estas consultas devuelven un resultado sin cambiar el estado del sistema y no tienen efectos secundarios.
+    * __Application__ :arrow_right: UserCases :arrow_right: FindOne :arrow_right: Queries
+    <br/>  
+  * Comandos: Estos comandos cambian el estado de un sistema.
+    * __Application__ :arrow_right: UserCases :arrow_right: Create :arrow_right: Commands
 
 Referencias:
   * [CQRS web-api command process pipeline with a mediator pattern MediatR](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr)
+  * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
+
 
 ## Health Check
 
@@ -273,14 +289,14 @@ Referencias:
   * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
 ## Logs
-
+In progress....
 
 Referencias:
   * [Serilog Web](https://serilog.net/)
   * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
       
 ## EF Code First (MySQL)
-
+In progress....
 
 Referencias:
   * [Aprendiendo Microsoft EF Core](https://learn.microsoft.com/es-es/ef/core/)
@@ -318,19 +334,6 @@ await this.unitOfWork.Complete();
 Referencias:
   * [Aprendiendo Microsoft Unit Of Work Pattern](https://learn.microsoft.com/es-es/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
   * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
-
-## CQRS Pattern
-
-Es un patron que busca tener dos objetos separados, uno para operaciones de lectura y otro para operaciones de escritura, a diferencia de otros enfoques que buscan tener todo en uno solo.
-
-  * Consultas: Estas consultas devuelven un resultado sin cambiar el estado del sistema y no tienen efectos secundarios.
-    * __Application__ :arrow_right: UserCases :arrow_right: FindOne :arrow_right: Queries
-    <br/>  
-  * Comandos: Estos comandos cambian el estado de un sistema.
-    * __Application__ :arrow_right: UserCases :arrow_right: Create :arrow_right: Commands
-
-Referencias:
-  * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
 ## Query Specification Pattern
 
@@ -372,7 +375,6 @@ Referencias:
   * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
 ## Multiple Environments
-
 Crear el json con el siguiente nombre:
   * appsettings.__environment__.json
 
@@ -386,7 +388,6 @@ Referencias:
   * [Aprendiendo Microsoft Environments](https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
 ## Unit Test
-
 xUnit: Estos test están escritos mediante XUnit y utilizando las siguientes bibliotecas FluentAssertions y FakeItEasy.
 
 Referencias:
@@ -396,14 +397,12 @@ Referencias:
   * [Aprendiendo Microsoft Unit Testing (mejores practicas)](https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices)
 
 ## Integration Test
-
 Microsoft.AspNetCore.TestHost - Estos Test nos ayudan a poder realizar una prueba de integración de nuestra APP. El objetivo del mismo es poder levantar el middleware de Net Core con todas las configuraciones.
 
 Referencias:
   * [Aprendiendo Microsoft Integration Tests](https://learn.microsoft.com/es-es/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
 
 ## Lectura recomendada:
-
   * [Aprendiendo Microsoft DDD con CRQS](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
 
 ## Licencia
