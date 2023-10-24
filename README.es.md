@@ -25,8 +25,7 @@ Instalar y seleccionar estas características:
   * MySQL Server
   * Worbench	
 * Ingresamos a la terminal desde el Visual Studio IDE
-
-![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+  ![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
 
 * Nos paramos en la carpeta "src" haciendo: 
     * cd src
@@ -61,8 +60,8 @@ Principal objetivo, implementar lógica de negocio y casos de uso. Debemos velar
 
     * __Behaviors__: contendrá comportamiento reutilizable por MediatR en cada interacción de la API con la capa de APPLICATION. 
     Ejemplos:
-      * LoggingBehavior: Se logueara cada request y response que procese MediatR. 
-      * ValidatorBehavior: Ejecuta los Validators que estén asociados a un MediatR.
+      * ___LoggingBehavior___: Se logueara cada request y response que procese MediatR. 
+      * ___ValidatorBehavior___: Ejecuta los Validators que estén asociados a un MediatR.
 
     * __UserCases__: contendrá los Casos de Uso que se definan para cumplir con los requerimientos solicitados. Un UserCase puede hacer uso de otro UserCase, para reutilizar código (ejemplo: revisar el UserCase de CreateAuthorizationCommand).
       * ___Commands___: contendrá las implementaciones transaccionales.
@@ -100,7 +99,7 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 - [MediatR + CQRS](#mediatr--cqrs)
 - [Health Check](#health-check)
 - [Logs](#logs)
-- [EF (Entity Framework) Code First](#ef-code-first-mysql)
+- [EF Code First + Migrations (MySQL)](#ef-code-first--migrations-mysql)
 - [Unit of Work Pattern](#unit-of-work)
 - [Query Specification Pattern](#query-specification-pattern)
 - [Multiple Environments File](#multiple-environments)
@@ -295,8 +294,55 @@ Referencias:
   * [Serilog Web](https://serilog.net/)
   * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
       
-## EF Code First (MySQL)
-In progress....
+## EF Code First + Migrations (MySQL)
+
+Entity Framework (EF) Core es una versión ligera, extensible, de código abierto y multiplataforma de la popular tecnología de acceso a datos Entity Framework. EF Core actúa para:
+* Permite a los desarrolladores trabajar con una base de datos usando objetos.
+* Permite prescindir de la mayor parte del código de acceso a datos que normalmente es necesario escribir.
+
+EF admite los siguientes métodos de desarrollo de modelos:
+* Generar un modelo a partir de una base de datos existente.
+* Codificar un modelo manualmente para que coincida con la base de datos.
+
+Migrations de EF, permite que una vez creado un modelo, podamos crear la base de datos a partir de dicho modelo. A su vez, migraciones permite que la base de datos evolucione a medida que el modelo va cambiando.
+
+### Herramienta CLI
+
+Usaremos la herramienta de interfaz de la línea de comandos (CLI) para Entity Framework Core que realizan tareas de desarrollo en tiempo de diseño. Por ejemplo, crean migraciones, las aplican y generan código para un modelo según una base de datos existente. Los comandos son una extensión para el comando dotnet multiplataforma, que forma parte del SDK de .NET Core. Estas herramientas funcionan con proyectos de .NET Core.
+
+* Ingresamos a la terminal desde el Visual Studio IDE
+  ![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+
+* Nos paramos en la carpeta "src" haciendo: 
+    * cd src
+
+Ahora podremos realizar ejecutar los siguientes comandos.
+
+#### Instalar herramienta
+  * dotnet tool install --global dotnet-ef
+  
+#### Agregar Migration
+  * dotnet ef migrations add ___[NOMBRE_DE_LA_MIGRATION]___ -p ./AuthorizationOperation.Infrastructure -o EF\Migrations -- "server=localhost;port=3306;user=root;password=___[PASSWORD]___;database=authorization_db"
+
+	Este comando creará la migración, con 3 archivos: 
+		1) .cs: Contiene las operaciones Up() y Down() que se aplicaran a la BD para remover o añadir objetos. 
+		2) .Designer.cs: Contiene la metadata que va a ser usada por EF Core. 
+		3) .ModelSnapshot.cs: Contiene un snapshot del modelo actual. Que será usada para determinar qué cambio cuando se realice la siguiente migración.
+
+#### Ejecutar Migration
+  * dotnet ef database update ___[NOMBRE_DE_LA_MIGRATION]___ -p ./AuthorizationOperation.Infrastructure -- "server=localhost;port=3306;user=root;password=___[PASSWORD]___;database=authorization_db"
+
+  Este comando ejecuta la migración hacia la Base de Datos.
+
+#### Ejecutar Migrations no aplicados
+  * dotnet ef database update -p ./AuthorizationOperation.Infrastructure -- "server=localhost;port=3306;user=root;password=___[PASSWORD]___;database=authorization_db"
+
+  Este comando ejecuta las migraciones hacia la Base de Datos que no se encuentren aplicadas. Esto se puede corroborar en la Base de Datos, consultando la tabla __efmigrationshistory, tabla que utiliza el framework para almacenar la información asociada a que migraciones se aplicaron.
+
+#### Obtener SQL del Migration
+  * dotnet ef migrations script 0 ___[NOMBRE_DE_LA_MIGRATION]___ -p ./AuthorizationOperation.Infrastructure -- "server=localhost;port=3306;user=root;password=___[PASSWORD]___;database=authorization_db"
+	
+  Genera script SQL a de la migración.
 
 Referencias:
   * [Aprendiendo Microsoft EF Core](https://learn.microsoft.com/es-es/ef/core/)
