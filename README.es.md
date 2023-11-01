@@ -288,7 +288,68 @@ Referencias:
   * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
 ## Logs
-In progress....
+
+Para poder obtener información y registrar errores producidos en nuestra aplicación, utilizaremos la librería Serilog, la cual nos facilita la implementación de esta característica muy util para el diagnostico.
+
+### Utilización
+Definir en nuestra clase una variable para almacenar el logger:
+```csharp
+private readonly ILogger<MyClass> logger;
+```
+Inyectar en el constructor el logger:
+```csharp
+public MyClass(ILogger<MyClass> logger)
+{
+  this.logger = logger;
+}
+```
+Hacer uso del logger, ejemplos:
+```csharp
+this.logger.Log(LogLevel.Information, "Authorization {0} already exists", auth.UUID);
+...
+this.logger.LogInformation("Authorization {0} already exists", auth.UUID);
+...
+this.logger.LogError("API Error: {api}: \n{result}",
+  apiException.RequestMessage.RequestUri, 
+  apiException.Content);
+```
+
+### Configuración
+La configuración del Serilog se encuentra en la siguiente clase: 
+  * __API__ :arrow_right: Program.cs    
+
+Y en el archivo appsettings.[Environment].json:
+
+```bash
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Microsoft": "Information",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "Override": {
+        "System": "Information",
+        "Microsoft": "Information"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "theme": "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console",
+          "outputTemplate": "{Timestamp:u} [{Level:u3}] [{RequestId}] {Message:lj} <s:{SourceContext}>{NewLine}{Exception}"
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName" ]
+  },
+```
+
+#### Nivel de prioridad
+
+* _Verbose_ :arrow_right: _Debug_ :arrow_right: _Information_ :arrow_right: _Warning_ :arrow_right: _Error_ :arrow_right: _Fatal_
+
+Ejemplo, si indicamos el nivel "Information", los Logs de nivel "Verbose" y "Debug" no se visualizaran.
+
 
 Referencias:
   * [Serilog Web](https://serilog.net/)
