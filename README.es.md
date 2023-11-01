@@ -106,7 +106,7 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 - [Unit Test](#unit-test)
 - [Integrations Test](#integration-test)
 
-## ==Arquitectura DDD==
+## <mark>Arquitectura DDD</mark>
 
 El objetivo principal de aplicar DDD o Domain Driven Design en inglés, es poder aislar el código que pertenece al dominio de los detalles técnicos de implementación y así centrarnos en la complejidad del negocio.
 
@@ -155,7 +155,7 @@ A su vez, cuando trabajamos con DDD debemos tener en cuenta:
   * [Aprendiendo Microsoft DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
   * [Introducción DDD](https://refactorizando.com/introduccion-domain-drive-design/)
 
-## ==Api Versions==
+## <mark>Api Versions</mark>
 
 El paquete API Versioning nos permite marcar las API como obsoletas. Entonces esto le da tiempo al cliente para preparar los cambios. De lo contrario, eliminar inmediatamente las API más antiguas podría generar problemas a los clientes.
 
@@ -179,7 +179,7 @@ Si queremos visualizar la configuración de ApiVersioning, debemos ingresar a la
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
 
 
-## ==JWT bearer authentication==
+## <mark>JWT bearer authentication</mark>
 
 1. Crear el token:
 ```bash
@@ -204,7 +204,7 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 * El token se encuentra configurado en 1 dia de expiración. En la clase JwtProvider > SecurityTokenDescriptor > Expires, usted puede cambiar la duración de la expiración asociada al token.
 * Use el atributo [Authorize] en el endpoint o en todo el controller para indicar que deberá usarse el JWT Token.
 
-## ==Swagger Oas3==
+## <mark>Swagger Oas3</mark>
 
 Es una herramienta basada en el estándar OpenAPI que nos permite documentar y probar nuestras Web APIs, para que sean fácilmente accesibles y entendibles por los usuarios o desarrolladores que pretendan utilizarlas.
 
@@ -242,7 +242,7 @@ Si queremos visualizar la configuración, debemos ingresar a la siguientes clase
   * [Aprendiendo Microsoft Swashbuckle](https://learn.microsoft.com/es-es/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
   
-## ==MediatR + CQRS==
+## <mark>MediatR + CQRS</mark>
 
 ### MediatR
 Es una biblioteca de código abierto, pequeña y simple, que implementa el patrón de mediador, para la canalización de mensajes (comandos) y enrutandolos, en memoria, a los controladores de comandos correctos.
@@ -266,7 +266,7 @@ En este ejemplo "_Authorization.Operation_", combinamos el patron mediador con e
   * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
 
-## ==Health Check==
+## <mark>Health Check</mark>
 
 Una aplicación se encarga de exponer las comprobaciones de estado como puntos de conexión HTTP, donde normalmente, las comprobaciones de estado se usan con un servicio de supervisión externa o un orquestador de contenedores para comprobar el estado de una aplicación. 
 
@@ -287,7 +287,7 @@ Y podemos ingresar al endpoint __"/health"__ para comprobar su funcionamiento.
 ### :page_facing_up: Referencias:
   * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
-## ==Logs==
+## <mark>Logs</mark>
 
 Para poder obtener información y registrar errores producidos en nuestra aplicación, utilizaremos la librería Serilog, la cual nos facilita la implementación de esta característica muy util para el diagnostico.
 
@@ -355,7 +355,7 @@ Ejemplo, si indicamos el nivel "Information", los Logs de nivel "Verbose" y "Deb
   * [Serilog Web](https://serilog.net/)
   * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
       
-## ==EF Code First + Migrations (MySQL)==
+## <mark>EF Code First + Migrations (MySQL)</mark>
 
 Entity Framework (EF) Core es una versión ligera, extensible, de código abierto y multiplataforma de la popular tecnología de acceso a datos Entity Framework. EF Core actúa para:
 * Permite a los desarrolladores trabajar con una base de datos usando objetos.
@@ -414,7 +414,7 @@ Ahora podremos realizar ejecutar los siguientes comandos.
   * [EF Core Tutorial 2](https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md)
   
 
-## ==Unit Of Work==
+## <mark>Unit Of Work</mark>
 
 Es un patron que tiene como propósito asegurarse de que se comparta un mismo contexto de base de datos, de modo que cuando se completan las tareas a realizar en la base de datos, se pueda llamar al SaveChanges, método en esa instancia del contexto y asegurarse de que todos los cambios relacionados se coordinarán. 
 
@@ -442,7 +442,7 @@ await this.unitOfWork.Complete();
   * [Aprendiendo Microsoft Unit Of Work Pattern](https://learn.microsoft.com/es-es/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
   * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 
-## ==Query Specification Pattern==
+## <mark>Query Specification Pattern</mark>
 
 Es un patron que busca cumplir con DDD para la consulta de datos de manera que dichas especificaciones se almacenen en la capa __Domain__, separando de manera efectiva la lógica que existe en las consultas de su implementación.
 
@@ -481,7 +481,7 @@ return Task.FromResult(result);
   * [Aprendiendo Microsoft Query Specification Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core#implement-the-query-specification-pattern)
   * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
-## ==Multiple Environments==
+## <mark>Multiple Environments</mark>
 Crear el json con el siguiente nombre:
   * appsettings.__environment__.json
 
@@ -494,7 +494,7 @@ Ejemplos:
 ### :page_facing_up: Referencias:
   * [Aprendiendo Microsoft Environments](https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
-## ==Unit Test==
+## <mark>Unit Test</mark>
 xUnit: Estos test están escritos mediante XUnit y utilizando las siguientes bibliotecas FluentAssertions y FakeItEasy.
 
 ### :page_facing_up: Referencias:
@@ -503,7 +503,7 @@ xUnit: Estos test están escritos mediante XUnit y utilizando las siguientes bib
   * [Blog NUnit vs xUnit vs MSTest](https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/)
   * [Aprendiendo Microsoft Unit Testing (mejores practicas)](https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices)
 
-## ==Integration Test==
+## <mark>Integration Test</mark>
 Microsoft.AspNetCore.TestHost - Estos Test nos ayudan a poder realizar una prueba de integración de nuestra APP. El objetivo del mismo es poder levantar el middleware de Net Core con todas las configuraciones.
 
 ### :page_facing_up: Referencias:
