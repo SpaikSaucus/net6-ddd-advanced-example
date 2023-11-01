@@ -106,7 +106,7 @@ Here we will find specific implementations for data access, ORMs, MicroORMS, HTT
 - [Unit Test](#unit-test)
 - [Integrations Test](#integration-test)
 
-## <mark>Architecture DDD</mark>
+## :large_blue_diamond: Architecture DDD
 The main objective of applying Domain Driven Design is to be able to isolate the code that belongs to the domain from the technical implementation details and thus focus on the complexity of the business.
 
 ### Core Principles
@@ -149,11 +149,11 @@ In turn, when we work with DDD we must take into account:
 ![ddd_1_en](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_1_en.png?raw=true)
 ![ddd_2_en](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_2_en.png?raw=true)
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft DDD](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
   * [Introduction DDD (spanish)](https://refactorizando.com/introduccion-domain-drive-design/)
 
-## <mark>Api Versions</mark>
+## :large_blue_diamond: Api Versions
 
 API Versioning package allows us to flag APIs as deprecated. So this gives time to the client to prepare changes. Otherwise immediately deleting older APIs could give a bad taste to clients.
 
@@ -173,10 +173,10 @@ If we want to view the ApiVersioning configuration, we must enter the following 
 
   * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
 
-## <mark>JWT bearer authentication</mark>
+## :large_blue_diamond: JWT bearer authentication
 
 1. Create Token:
 ```bash
@@ -201,7 +201,7 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 * The token is 1-day expiration. In the class JwtProvider > SecurityTokenDescriptor > Expires, you can change the expiration duration for the token.
 * You use the attribute [Authorize] in the endpoint or entire controller to indicate that should use JWT Token.
 
-## <mark>Swagger Oas3</mark>
+## :large_blue_diamond: Swagger Oas3
 
 It is a tool based on the OpenAPI standard that allows us to document and test our Web APIs, so that they are easily accessible and understandable by users or developers who intend to use them.
 
@@ -235,11 +235,11 @@ If we want to view the configuration, we must enter the following classes:
      and in:
      * ServiceCollections :arrow_right: SwaggerServiceCollectionExtensions
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft Swashbuckle](https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
 
-## <mark>MediatR + CQRS</mark>
+## :large_blue_diamond: MediatR + CQRS
 
 ### MediatR
 It is a small and simple open source library that implements the mediator pattern, for piping messages (commands) and routing them, in memory, to the correct command handlers.
@@ -258,11 +258,11 @@ In this example "_Authorization.Operation_", we combine the mediator pattern wit
   * Commands: These commands change the state of a system.
     * __Application__ :arrow_right: UserCases :arrow_right: Create :arrow_right: Commands
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [CQRS web-api command process pipeline with a mediator pattern MediatR](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr)
   * [Learn Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
-## <mark>Health Check</mark>
+## :large_blue_diamond: Health Check
 
 Health checks are exposed by an app as HTTP endpoints, are typically used with an external monitoring service or container orchestrator to check the status of an app. 
 
@@ -280,10 +280,10 @@ The configuration can be found in:
 And we can call the __"/health"__ endpoint to check its operation.
    * https://localhost:5001/health
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
-## <mark>Logs</mark>
+## :large_blue_diamond: Logs
 
 To obtain information and record errors that occur in our application, we will use the Serilog library, which makes it easier for us to implement this very useful feature for diagnosis.
 
@@ -347,11 +347,11 @@ And in the file appsettings.[Environment].json:
 For example, if we indicate the "Information" level, the "Verbose" and "Debug" level logs will not be displayed.
 
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Serilog Web](https://serilog.net/)
   * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
     
-## <mark>EF Code First + Migrations (MySQL)</mark>
+## :large_blue_diamond: EF Code First + Migrations (MySQL)
 
 Entity Framework (EF) Core is a lightweight, extensible, open source, cross-platform version of the popular Entity Framework data access technology. EF Core works to:
 * Allows developers to work with a database using objects.
@@ -401,7 +401,7 @@ Now we can execute the following commands.
 
    Generate SQL script for migration.
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft EF Core](https://learn.microsoft.com/en-us/ef/core/)
   * [Learn Microsoft EF Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
   * [Learn Microsoft EF Core DBContext](https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/)
@@ -409,7 +409,7 @@ Now we can execute the following commands.
   * [EF Core Tutorial 1](https://www.entityframeworktutorial.net/efcore/install-entity-framework-core.aspx)
   * [EF Core Tutorial 2](https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md)
 
-## <mark>Unit Of Work</mark>
+## :large_blue_diamond: Unit Of Work
 
 It is a pattern that has the purpose of ensuring that the same database context is shared so that when the tasks to be performed in the database are completed, the SaveChanges method can be called on that instance of the context and ensure that all related changes will be coordinated.
 
@@ -433,11 +433,11 @@ this.unitOfWork.Repository<Authorization>().Add(authorization);
 await this.unitOfWork.Complete();
 ```
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft Unit Of Work Pattern](https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
   * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 
-## <mark>Query Specification Pattern</mark>
+## :large_blue_diamond: Query Specification Pattern
 
 It is a pattern that seeks to comply with DDD for data queries so that these specifications are stored in the __Domain__ layer, effectively separating the logic that exists in the queries from their implementation.
 
@@ -471,11 +471,11 @@ var spec = new AuthorizationGetSpecification(request.Id);
 var result = this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefault();
 return Task.FromResult(result);
 ```
-### :page_facing_up: References: 
+### References: :triangular_flag_on_post: 
   * [Learn Microsoft Query Specification Pattern in DDD](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core#implement-the-query-specification-pattern)
   * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
-## <mark>Multiple Environments</mark>
+## :large_blue_diamond: Multiple Environments
 Create the json with this naming:
   * appsettings.__environment__.json
 
@@ -485,22 +485,22 @@ Examples:
 
 ![img_hierarchy_2](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/multiple_environments_2.png?raw=true)	
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft Environments](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
-## <mark>Unit Test</mark>
+## :large_blue_diamond: Unit Test
 xUnit: These tests are written using XUnit and using the following FluentAssertions and FakeItEasy libraries.
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Fluent Assertions Web](https://fluentassertions.com/)
   * [Fake It Easy Web](https://fakeiteasy.readthedocs.io/en/stable/)
   * [Blog NUnit vs xUnit vs MSTest](https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/)
   * [Learn Microsoft Unit Testing (best practices)](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices)
 
-## <mark>Integration Test</mark>
+## :large_blue_diamond: Integration Test
 Microsoft.AspNetCore.TestHost - These Tests help us perform an integration test of our APP. The objective of this is to be able to build the Net Core middleware with all the configurations.
 
-### :page_facing_up: References:
+### References: :triangular_flag_on_post:
   * [Learn Microsoft Integration Tests](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
 
 ## Read Recommended:

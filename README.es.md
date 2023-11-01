@@ -106,7 +106,7 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 - [Unit Test](#unit-test)
 - [Integrations Test](#integration-test)
 
-## <mark>Arquitectura DDD</mark>
+## :large_blue_diamond: Arquitectura DDD
 
 El objetivo principal de aplicar DDD o Domain Driven Design en inglés, es poder aislar el código que pertenece al dominio de los detalles técnicos de implementación y así centrarnos en la complejidad del negocio.
 
@@ -151,11 +151,11 @@ A su vez, cuando trabajamos con DDD debemos tener en cuenta:
 ![ddd_1_es](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_1_es.png?raw=true)
 ![ddd_2_es](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_2_es.png?raw=true)
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
   * [Introducción DDD](https://refactorizando.com/introduccion-domain-drive-design/)
 
-## <mark>Api Versions</mark>
+## :large_blue_diamond: Api Versions
 
 El paquete API Versioning nos permite marcar las API como obsoletas. Entonces esto le da tiempo al cliente para preparar los cambios. De lo contrario, eliminar inmediatamente las API más antiguas podría generar problemas a los clientes.
 
@@ -175,11 +175,11 @@ Si queremos visualizar la configuración de ApiVersioning, debemos ingresar a la
 
   * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions    
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
 
 
-## <mark>JWT bearer authentication</mark>
+## :large_blue_diamond: JWT bearer authentication
 
 1. Crear el token:
 ```bash
@@ -204,7 +204,7 @@ curl --location --request GET 'http://localhost:5000/api/v2/authorizations/findA
 * El token se encuentra configurado en 1 dia de expiración. En la clase JwtProvider > SecurityTokenDescriptor > Expires, usted puede cambiar la duración de la expiración asociada al token.
 * Use el atributo [Authorize] en el endpoint o en todo el controller para indicar que deberá usarse el JWT Token.
 
-## <mark>Swagger Oas3</mark>
+## :large_blue_diamond: Swagger Oas3
 
 Es una herramienta basada en el estándar OpenAPI que nos permite documentar y probar nuestras Web APIs, para que sean fácilmente accesibles y entendibles por los usuarios o desarrolladores que pretendan utilizarlas.
 
@@ -238,11 +238,11 @@ Si queremos visualizar la configuración, debemos ingresar a la siguientes clase
     y en:
     * ServiceCollections :arrow_right: SwaggerServiceCollectionExtensions
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft Swashbuckle](https://learn.microsoft.com/es-es/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
   * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
   
-## <mark>MediatR + CQRS</mark>
+## :large_blue_diamond: MediatR + CQRS
 
 ### MediatR
 Es una biblioteca de código abierto, pequeña y simple, que implementa el patrón de mediador, para la canalización de mensajes (comandos) y enrutandolos, en memoria, a los controladores de comandos correctos.
@@ -261,12 +261,12 @@ En este ejemplo "_Authorization.Operation_", combinamos el patron mediador con e
   * Comandos: Estos comandos cambian el estado de un sistema.
     * __Application__ :arrow_right: UserCases :arrow_right: Create :arrow_right: Commands
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [CQRS web-api command process pipeline with a mediator pattern MediatR](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr)
   * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
 
-## <mark>Health Check</mark>
+## :large_blue_diamond: Health Check
 
 Una aplicación se encarga de exponer las comprobaciones de estado como puntos de conexión HTTP, donde normalmente, las comprobaciones de estado se usan con un servicio de supervisión externa o un orquestador de contenedores para comprobar el estado de una aplicación. 
 
@@ -284,10 +284,10 @@ Dicha configuración se puede encontrar en:
 Y podemos ingresar al endpoint __"/health"__ para comprobar su funcionamiento.
   * https://localhost:5001/health
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
-## <mark>Logs</mark>
+## :large_blue_diamond: Logs
 
 Para poder obtener información y registrar errores producidos en nuestra aplicación, utilizaremos la librería Serilog, la cual nos facilita la implementación de esta característica muy util para el diagnostico.
 
@@ -351,11 +351,11 @@ Y en el archivo appsettings.[Environment].json:
 Ejemplo, si indicamos el nivel "Information", los Logs de nivel "Verbose" y "Debug" no se visualizaran.
 
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Serilog Web](https://serilog.net/)
   * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
       
-## <mark>EF Code First + Migrations (MySQL)</mark>
+## :large_blue_diamond: EF Code First + Migrations (MySQL)
 
 Entity Framework (EF) Core es una versión ligera, extensible, de código abierto y multiplataforma de la popular tecnología de acceso a datos Entity Framework. EF Core actúa para:
 * Permite a los desarrolladores trabajar con una base de datos usando objetos.
@@ -405,7 +405,7 @@ Ahora podremos realizar ejecutar los siguientes comandos.
 	
   Genera script SQL a de la migración.
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft EF Core](https://learn.microsoft.com/es-es/ef/core/)
   * [Aprendiendo Microsoft EF Core CLI](https://learn.microsoft.com/es-es/ef/core/cli/dotnet)
   * [Aprendiendo Microsoft EF Core DBContext](https://learn.microsoft.com/es-es/ef/core/dbcontext-configuration/)
@@ -414,7 +414,7 @@ Ahora podremos realizar ejecutar los siguientes comandos.
   * [EF Core Tutorial 2](https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md)
   
 
-## <mark>Unit Of Work</mark>
+## :large_blue_diamond: Unit Of Work
 
 Es un patron que tiene como propósito asegurarse de que se comparta un mismo contexto de base de datos, de modo que cuando se completan las tareas a realizar en la base de datos, se pueda llamar al SaveChanges, método en esa instancia del contexto y asegurarse de que todos los cambios relacionados se coordinarán. 
 
@@ -438,11 +438,11 @@ this.unitOfWork.Repository<Authorization>().Add(authorization);
 await this.unitOfWork.Complete();
 ```
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft Unit Of Work Pattern](https://learn.microsoft.com/es-es/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
   * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 
-## <mark>Query Specification Pattern</mark>
+## :large_blue_diamond: Query Specification Pattern
 
 Es un patron que busca cumplir con DDD para la consulta de datos de manera que dichas especificaciones se almacenen en la capa __Domain__, separando de manera efectiva la lógica que existe en las consultas de su implementación.
 
@@ -477,11 +477,11 @@ var result = this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefau
 return Task.FromResult(result);
 ```
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft Query Specification Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core#implement-the-query-specification-pattern)
   * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
-## <mark>Multiple Environments</mark>
+## :large_blue_diamond: Multiple Environments
 Crear el json con el siguiente nombre:
   * appsettings.__environment__.json
 
@@ -491,22 +491,22 @@ Ejemplos:
 
 ![img_hierarchy_2](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/multiple_environments_2.png?raw=true)	
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft Environments](https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
-## <mark>Unit Test</mark>
+## :large_blue_diamond: Unit Test
 xUnit: Estos test están escritos mediante XUnit y utilizando las siguientes bibliotecas FluentAssertions y FakeItEasy.
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Fluent Assertions Web](https://fluentassertions.com/)
   * [Fake It Easy Web](https://fakeiteasy.readthedocs.io/en/stable/)
   * [Blog NUnit vs xUnit vs MSTest](https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/)
   * [Aprendiendo Microsoft Unit Testing (mejores practicas)](https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices)
 
-## <mark>Integration Test</mark>
+## :large_blue_diamond: Integration Test
 Microsoft.AspNetCore.TestHost - Estos Test nos ayudan a poder realizar una prueba de integración de nuestra APP. El objetivo del mismo es poder levantar el middleware de Net Core con todas las configuraciones.
 
-### :page_facing_up: Referencias:
+### Referencias: :triangular_flag_on_post:
   * [Aprendiendo Microsoft Integration Tests](https://learn.microsoft.com/es-es/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
 
 ## Lectura recomendada:
