@@ -24,10 +24,11 @@ Install and select these features:
   * Connector .net
   * MySQL Server
   * Worbench	
-* We enter the terminal from the Visual Studio IDE.
-  ![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+* enter the terminal from the Visual Studio IDE.
 
-* We go to the "src" folder by doing:
+![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+
+* go to the "src" folder by doing:
   * cd src
 * Run these commands:
   * dotnet tool install --global dotnet-ef
@@ -92,19 +93,19 @@ Here we will find specific implementations for data access, ORMs, MicroORMS, HTT
 
 ## Features List
 
-- [Architecture DDD (Domain Driven Design)](#architecture-ddd)
-- [Api Versions](#api-versions)
-- [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
-- [Swagger Oas3 (OpenAPI Specification - Version 3)](#swagger-oas3)
-- [MediatR + CQRS](#mediatr--cqrs)
-- [Health Check](#health-check)
-- [Logs](#logs)
-- [EF Code First + Migrations (MySQL)](#ef-code-first--migrations-mysql)
-- [Unit of Work Pattern](#unit-of-work)
-- [Query Specification Pattern](#query-specification-pattern)
-- [Multiple Environments File](#multiple-environments)
-- [Unit Test](#unit-test)
-- [Integrations Test](#integration-test)
+- [Architecture DDD (Domain Driven Design)](#large_blue_diamond-architecture-ddd)
+- [Api Versions](#large_blue_diamond-api-versions)
+- [JWT (JSON Web Tokens)](#large_blue_diamond-jwt-bearer-authentication)
+- [Swagger Oas3 (OpenAPI Specification - Version 3)](#large_blue_diamond-swagger-oas3)
+- [MediatR + CQRS](#large_blue_diamond-mediatr--cqrs)
+- [Health Check](#large_blue_diamond-health-check)
+- [Logs](#large_blue_diamond-logs)
+- [EF Code First + Migrations (MySQL)](#large_blue_diamond-ef-code-first--migrations-mysql)
+- [Unit of Work Pattern](#large_blue_diamond-unit-of-work)
+- [Query Specification Pattern](#large_blue_diamond-query-specification-pattern)
+- [Multiple Environments File](#large_blue_diamond-multiple-environments)
+- [Unit Test](#large_blue_diamond-unit-test)
+- [Integrations Test](#large_blue_diamond-integration-test)
 
 ## :large_blue_diamond: Architecture DDD
 The main objective of applying Domain Driven Design is to be able to isolate the code that belongs to the domain from the technical implementation details and thus focus on the complexity of the business.

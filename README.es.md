@@ -25,7 +25,8 @@ Instalar y seleccionar estas características:
   * MySQL Server
   * Worbench	
 * Ingresamos a la terminal desde el Visual Studio IDE
-  ![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+
+![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
 
 * Nos paramos en la carpeta "src" haciendo: 
     * cd src
@@ -92,19 +93,19 @@ Aquí encontraremos implementaciones concretas para acceso a datos, ORMs, MicroO
 
 ## Lista de características
 
-- [Arquitectura DDD (Domain Driven Design)](#arquitectura-ddd)
-- [Api Versions](#api-versions)
-- [JWT (JSON Web Tokens)](#jwt-bearer-authentication)
-- [Swagger Oas3 (OpenAPI Specification - Version 3)](#swagger-oas3)
-- [MediatR + CQRS](#mediatr--cqrs)
-- [Health Check](#health-check)
-- [Logs](#logs)
-- [EF Code First + Migrations (MySQL)](#ef-code-first--migrations-mysql)
-- [Unit of Work Pattern](#unit-of-work)
-- [Query Specification Pattern](#query-specification-pattern)
-- [Multiple Environments File](#multiple-environments)
-- [Unit Test](#unit-test)
-- [Integrations Test](#integration-test)
+- [Arquitectura DDD (Domain Driven Design)](#large_blue_diamond-arquitectura-ddd)
+- [Api Versions](#large_blue_diamond-api-versions)
+- [JWT (JSON Web Tokens)](#large_blue_diamond-jwt-bearer-authentication)
+- [Swagger Oas3 (OpenAPI Specification - Version 3)](#large_blue_diamond-swagger-oas3)
+- [MediatR + CQRS](#large_blue_diamond-mediatr--cqrs)
+- [Health Check](#large_blue_diamond-health-check)
+- [Logs](#large_blue_diamond-logs)
+- [EF Code First + Migrations (MySQL)](#large_blue_diamond-ef-code-first--migrations-mysql)
+- [Unit of Work Pattern](#large_blue_diamond-unit-of-work)
+- [Query Specification Pattern](#large_blue_diamond-query-specification-pattern)
+- [Multiple Environments File](#large_blue_diamond-multiple-environments)
+- [Unit Test](#large_blue_diamond-unit-test)
+- [Integrations Test](#large_blue_diamond-integration-test)
 
 ## :large_blue_diamond: Arquitectura DDD
 
