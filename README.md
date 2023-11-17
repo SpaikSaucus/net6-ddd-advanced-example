@@ -368,10 +368,11 @@ EF Migrations allows once a model is created, we can create the database from th
 
 We will use the command line interface (CLI) tool for Entity Framework Core that performs development tasks at design time. For example, they create migrations, apply them, and generate code for a model based on an existing database. The commands are an extension to the cross-platform dotnet command, which is part of the .NET Core SDK. These tools work with .NET Core projects.
 
-* We enter the terminal from the Visual Studio IDE
-   ![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+* enter the terminal from the Visual Studio IDE
 
-* We stop in the "src" folder doing:
+![img_powershell_vs](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/getting_started_1.png?raw=true)
+
+* go to the "src" folder by doing:
      * cd src
 
 Now we can execute the following commands.
