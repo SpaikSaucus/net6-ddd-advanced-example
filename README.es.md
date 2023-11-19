@@ -6,7 +6,7 @@ Ejemplo NET 6 con arquitectura DDD y algunas funciones avanzadas.
 ## Tabla de Contenido
 
 - [Iniciando](#iniciando)
-- [Estructura de carpetas](#folder-structure)
+- [Estructura de carpetas](#estructura-de-carpetas)
   - [1- Entrypoint](#1--entrypoint)
   - [2- Core](#2--core)
   - [3- Infrastructure](#3--infrastructure)
