@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace AuthorizationOperation.Domain.Exceptions
 {
@@ -9,8 +10,6 @@ namespace AuthorizationOperation.Domain.Exceptions
         public DomainException() { }
         public DomainException(string message) : base(message) { }
         public DomainException(string message, Exception inner) : base(message, inner) { }
-        protected DomainException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        protected DomainException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

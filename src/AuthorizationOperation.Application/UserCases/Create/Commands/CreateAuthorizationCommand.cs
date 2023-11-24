@@ -1,6 +1,7 @@
 ﻿using AuthorizationOperation.Application.UserCases.FindOne.Queries;
 using AuthorizationOperation.Domain.Authorization.Models;
 using AuthorizationOperation.Domain.Core;
+using AuthorizationOperation.Domain.Exceptions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
@@ -37,7 +38,7 @@ namespace AuthorizationOperation.Application.UserCases.Create.Commands
             if (authorizationExists != null) 
             {
                 this.logger.LogInformation(messageExistsAuthorization, authorizationExists.UUID, authorizationExists.Status, authorizationExists.Created);
-                throw new Exception(string.Format(messageExistsAuthorization, authorizationExists.UUID, authorizationExists.Status, authorizationExists.Created));
+                throw new DomainException(string.Format(messageExistsAuthorization, authorizationExists.UUID, authorizationExists.Status, authorizationExists.Created));
             }
 
             var authorization = new Authorization()
