@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace AuthorizationOperation.API.Controllers.V1.Customers
+namespace AuthorizationOperation.API.Controllers.V1
 {
     /// <summary>
     /// This Endpoint use Explicit ApiVersion attribute so only will be served when the parameter api-version match.

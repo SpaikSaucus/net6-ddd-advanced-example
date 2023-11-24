@@ -12,7 +12,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AuthorizationOperation.API.Controllers.V2.Customers
+namespace AuthorizationOperation.API.Controllers.V2
 {
     /// <summary>
     /// This Endpoint use Explicit ApiVersion attribute so only will be served when the parameter api-version match.
