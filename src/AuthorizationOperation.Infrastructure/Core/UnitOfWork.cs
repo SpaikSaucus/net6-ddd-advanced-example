@@ -1,5 +1,5 @@
 ﻿using AuthorizationOperation.Domain.Core;
-using AuthorizationOperation.Infrastructure.EF;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Threading.Tasks;
@@ -8,10 +8,10 @@ namespace AuthorizationOperation.Infrastructure.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AuthorizationDbContext context;
+        private readonly DbContext context;
         private Hashtable repositories;
 
-        public UnitOfWork(AuthorizationDbContext context)
+        public UnitOfWork(DbContext context)
         {
             this.context = context;
         }
@@ -23,8 +23,7 @@ namespace AuthorizationOperation.Infrastructure.Core
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
-            if (this.repositories == null)
-                this.repositories = new Hashtable();
+            this.repositories ??= new Hashtable();
 
             var type = typeof(TEntity).Name;
 
