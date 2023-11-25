@@ -12,6 +12,10 @@ namespace AuthorizationOperation.Domain.Authorization.Queries
 
             Expression<Func<Models.Authorization, bool>> criteria = null;
 
+
+            if (id == default && uuid == default)
+                throw new ArgumentNullException(nameof(id));
+
             if (id != default)
             {
                 criteria = this.OrCriteria(criteria, x => x.Id == id);

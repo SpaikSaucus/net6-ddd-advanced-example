@@ -5,7 +5,7 @@ using AuthorizationOperation.Application.Behaviors;
 
 namespace AuthorizationOperation.Infrastructure.Bootstrap.AutofacModules
 {
-    internal class MediatorModule : Module
+    public class MediatorModule : Module
     {
         private readonly bool enableCommandLogging;
 

@@ -4,7 +4,6 @@ using AuthorizationOperation.Domain.Core;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -44,7 +43,7 @@ namespace AuthorizationOperation.Application.UserCases.Login.Commands
         {
             var userExists = await this.mediator.Send(new UserGetQuery() { UserName = cmd.UserName, Password = cmd.Password }, cancellationToken);
             if (userExists == null)
-                throw new Exception("User " + cmd.UserName + " Unauthorized");
+                return string.Empty;
 
             var claims = new ClaimDto
             {

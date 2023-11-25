@@ -42,7 +42,7 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Security
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var createdToken = tokenHandler.CreateToken(tokenDescriptor);
-
+            
             return tokenHandler.WriteToken(createdToken);
         }
     }

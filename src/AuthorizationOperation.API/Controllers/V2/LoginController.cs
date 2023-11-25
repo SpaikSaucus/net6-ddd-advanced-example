@@ -32,6 +32,9 @@ namespace AuthorizationOperation.API.Controllers.V2
                 Password = req.Password
             };
             var result = await mediator.Send(cmd);
+            if (string.IsNullOrEmpty(result))
+                return Unauthorized();
+
             return Ok(result);
         }
     }
