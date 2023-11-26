@@ -29,7 +29,6 @@
     <ProjectReference Include="..\..\src\AuthorizationOperation.API\AuthorizationOperation.API.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Infrastructure\" />
   </ItemGroup>
 </Project>

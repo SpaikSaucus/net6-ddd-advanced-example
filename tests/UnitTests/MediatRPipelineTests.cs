@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using AuthorizationOperation.Application.Behaviors;
 using Xunit;
 
-namespace AuthorizationOperation.UnitTests
+namespace UnitTests
 {
     public class MediatRPipelineTests
     {
