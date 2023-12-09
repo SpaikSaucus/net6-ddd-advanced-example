@@ -152,9 +152,9 @@ A su vez, cuando trabajamos con DDD debemos tener en cuenta:
 ![ddd_1_es](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_1_es.png?raw=true)
 ![ddd_2_es](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/ddd_2_es.png?raw=true)
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
-  * [Introducción DDD](https://refactorizando.com/introduccion-domain-drive-design/)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
+> * [Introducción DDD](https://refactorizando.com/introduccion-domain-drive-design/)
 
 ## :large_blue_diamond: Api Versions
 
@@ -176,8 +176,8 @@ Si queremos visualizar la configuración de ApiVersioning, debemos ingresar a la
 
   * __Infrastructure.Bootstrap__ :arrow_right: Extensions :arrow_right: ServiceCollection :arrow_right: ApiVersioningServiceCollectionExtensions    
 
-### Referencias: :triangular_flag_on_post:
-  * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
+### Referencias :triangular_flag_on_post:
+> * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
 
 
 ## :large_blue_diamond: JWT bearer authentication
@@ -239,9 +239,9 @@ Si queremos visualizar la configuración, debemos ingresar a la siguientes clase
     y en:
     * ServiceCollections :arrow_right: SwaggerServiceCollectionExtensions
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft Swashbuckle](https://learn.microsoft.com/es-es/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
-  * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft Swashbuckle](https://learn.microsoft.com/es-es/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio)
+> * [Blog API versioning and integrate Swagger](https://blog.christian-schou.dk/how-to-use-api-versioning-in-net-core-web-api/)
   
 ## :large_blue_diamond: MediatR + CQRS
 
@@ -262,9 +262,9 @@ En este ejemplo "_Authorization.Operation_", combinamos el patron mediador con e
   * Comandos: Estos comandos cambian el estado de un sistema.
     * __Application__ :arrow_right: UserCases :arrow_right: Create :arrow_right: Commands
 
-### Referencias: :triangular_flag_on_post:
-  * [CQRS web-api command process pipeline with a mediator pattern MediatR](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr)
-  * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
+### Referencias :triangular_flag_on_post:
+> * [CQRS web-api command process pipeline with a mediator pattern MediatR](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr)
+> * [Aprendiendo Microsoft CRQS Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
 
 
 ## :large_blue_diamond: Health Check
@@ -285,8 +285,8 @@ Dicha configuración se puede encontrar en:
 Y podemos ingresar al endpoint __"/health"__ para comprobar su funcionamiento.
   * https://localhost:5001/health
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft Health Checks](https://learn.microsoft.com/es-es/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-6.0)
 
 ## :large_blue_diamond: Logs
 
@@ -352,9 +352,9 @@ Y en el archivo appsettings.[Environment].json:
 Ejemplo, si indicamos el nivel "Information", los Logs de nivel "Verbose" y "Debug" no se visualizaran.
 
 
-### Referencias: :triangular_flag_on_post:
-  * [Serilog Web](https://serilog.net/)
-  * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
+### Referencias :triangular_flag_on_post:
+> * [Serilog Web](https://serilog.net/)
+> * [Serilog Tutorial](https://stackify.com/serilog-tutorial-net-logging/)
       
 ## :large_blue_diamond: EF Code First + Migrations (MySQL)
 
@@ -407,13 +407,13 @@ Ahora podremos realizar ejecutar los siguientes comandos.
 	
   Genera script SQL a de la migración.
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft EF Core](https://learn.microsoft.com/es-es/ef/core/)
-  * [Aprendiendo Microsoft EF Core CLI](https://learn.microsoft.com/es-es/ef/core/cli/dotnet)
-  * [Aprendiendo Microsoft EF Core DBContext](https://learn.microsoft.com/es-es/ef/core/dbcontext-configuration/)
-  * [Aprendiendo Microsoft EF Core Implementación](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core)
-  * [EF Core Tutorial 1](https://www.entityframeworktutorial.net/efcore/install-entity-framework-core.aspx)
-  * [EF Core Tutorial 2](https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft EF Core](https://learn.microsoft.com/es-es/ef/core/)
+> * [Aprendiendo Microsoft EF Core CLI](https://learn.microsoft.com/es-es/ef/core/cli/dotnet)
+> * [Aprendiendo Microsoft EF Core DBContext](https://learn.microsoft.com/es-es/ef/core/dbcontext-configuration/)
+> * [Aprendiendo Microsoft EF Core Implementación](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core)
+> * [EF Core Tutorial 1](https://www.entityframeworktutorial.net/efcore/install-entity-framework-core.aspx)
+> * [EF Core Tutorial 2](https://github.com/fedeojeda95/N6A-AN-DA2-2019.1-Clases/blob/master/Clases/Clase%203%20-%20EntityFrameworkCore.md)
   
 
 ## :large_blue_diamond: Unit Of Work
@@ -440,9 +440,9 @@ this.unitOfWork.Repository<Authorization>().Add(authorization);
 await this.unitOfWork.Complete();
 ```
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft Unit Of Work Pattern](https://learn.microsoft.com/es-es/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
-  * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft Unit Of Work Pattern](https://learn.microsoft.com/es-es/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application#creating-the-unit-of-work-class)
+> * [Martin Fower Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 
 ## :large_blue_diamond: Query Specification Pattern
 
@@ -479,9 +479,9 @@ var result = this.unitOfWork.Repository<Authorization>().Find(spec).FirstOrDefau
 return Task.FromResult(result);
 ```
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft Query Specification Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core#implement-the-query-specification-pattern)
-  * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft Query Specification Pattern in DDD](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implementation-entity-framework-core#implement-the-query-specification-pattern)
+> * [Medium Specification Pattern Generic Repository](https://medium.com/@rudyzio92/net-core-using-the-specification-pattern-alongside-a-generic-repository-318cd4eea4aa)
 
 ## :large_blue_diamond: Multiple Environments
 Crear el json con el siguiente nombre:
@@ -493,26 +493,26 @@ Ejemplos:
 
 ![img_hierarchy_2](https://github.com/SpaikSaucus/net6-ddd-advanced-example/blob/main/readme-img/multiple_environments_2.png?raw=true)	
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft Environments](https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft Environments](https://learn.microsoft.com/es-es/aspnet/core/fundamentals/environments?view=aspnetcore-6.0)
 
 ## :large_blue_diamond: Unit Test
 xUnit: Estos test están escritos mediante XUnit y utilizando las siguientes bibliotecas FluentAssertions y FakeItEasy.
 
-### Referencias: :triangular_flag_on_post:
-  * [Fluent Assertions Web](https://fluentassertions.com/)
-  * [Fake It Easy Web](https://fakeiteasy.readthedocs.io/en/stable/)
-  * [Blog NUnit vs xUnit vs MSTest](https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/)
-  * [Aprendiendo Microsoft Unit Testing (mejores practicas)](https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices)
+### Referencias :triangular_flag_on_post:
+> * [Fluent Assertions Web](https://fluentassertions.com/)
+> * [Fake It Easy Web](https://fakeiteasy.readthedocs.io/en/stable/)
+> * [Blog NUnit vs xUnit vs MSTest](https://www.lambdatest.com/blog/nunit-vs-xunit-vs-mstest/)
+> * [Aprendiendo Microsoft Unit Testing (mejores practicas)](https://learn.microsoft.com/es-es/dotnet/core/testing/unit-testing-best-practices)
 
 ## :large_blue_diamond: Integration Test
 Microsoft.AspNetCore.TestHost - Estos Test nos ayudan a poder realizar una prueba de integración de nuestra APP. El objetivo del mismo es poder levantar el middleware de Net Core con todas las configuraciones.
 
-### Referencias: :triangular_flag_on_post:
-  * [Aprendiendo Microsoft Integration Tests](https://learn.microsoft.com/es-es/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
+### Referencias :triangular_flag_on_post:
+> * [Aprendiendo Microsoft Integration Tests](https://learn.microsoft.com/es-es/aspnet/core/test/integration-tests?view=aspnetcore-6.0)
 
 ## Lectura recomendada:
-  * [Aprendiendo Microsoft DDD con CRQS](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
+> * [Aprendiendo Microsoft DDD con CRQS](https://learn.microsoft.com/es-es/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
 
 ## Licencia
 
