@@ -1,12 +1,12 @@
 namespace AuthorizationOperation.Infrastructure.Bootstrap.Security
 {
-    //TODO: That's an example, here do you need to specify your owns Claims 
+    /// <summary>
+    /// Check if it does not exist in this list: https://learn.microsoft.com/es-es/dotnet/api/system.security.claims.claimtypes?view=net-8.0 
+    /// If it exists, the collision means that the custom type is replaces with http://schemas.xmlsoap.org/ws/2005/05/identity/claims/[text] 
+    /// and throws "ErrorClaimNotExist" when you run the constructor for ClaimsBaseUser.
+    /// </summary>
     public class UserClaimTypes
     {
         public const string Guid = "guid";
-        public const string UserName = "user_name";
-        public const string FirstName = "first_name";
-        public const string LastName = "last_name";
-        public const string Email = "email";
     }
 }

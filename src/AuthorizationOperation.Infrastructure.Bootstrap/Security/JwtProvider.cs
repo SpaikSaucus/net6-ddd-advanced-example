@@ -23,10 +23,10 @@ namespace AuthorizationOperation.Infrastructure.Bootstrap.Security
             var claims = new List<Claim>
             {
                 new Claim(UserClaimTypes.Guid, userInformation.Guid),
-                new Claim(UserClaimTypes.UserName, userInformation.UserName),
-                new Claim(UserClaimTypes.FirstName, userInformation.FirstName),
-                new Claim(UserClaimTypes.LastName, userInformation.LastName),
-                new Claim(UserClaimTypes.Email, userInformation.Email)
+                new Claim(ClaimTypes.NameIdentifier, userInformation.UserName),
+                new Claim(ClaimTypes.Name, userInformation.FirstName),
+                new Claim(ClaimTypes.Surname, userInformation.LastName),
+                new Claim(ClaimTypes.Email, userInformation.Email)
             };
 
 #warning You cannot have secrets in your Code, for educational purposes, we will configure the secret in the appSettings.
